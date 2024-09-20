@@ -7,6 +7,7 @@ import React from "react";
 export default function Labs() {
   return (
     <div>
+      <h2>Xinbo Fan, Section 02</h2>
       <h1>Labs</h1>
       <TOC />
       <Routes>
@@ -15,6 +16,13 @@ export default function Labs() {
         <Route path="Lab2" element={<Lab2 />} />
         <Route path="Lab3" element={<Lab3 />} />
       </Routes>
+      <a
+        href="https://github.com/xinbofan/kanbas-react-web-app"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Relevant source code repositories
+      </a>
     </div>
   );
 }
