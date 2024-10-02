@@ -320,7 +320,6 @@ export default function Lab1() {
           </a>
           to get Github repository
           <br />
-          {/* copy rest of form elements here  */}
         </form>
       </div>
     </div>
