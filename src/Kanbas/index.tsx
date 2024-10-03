@@ -4,13 +4,13 @@ import React from "react";
 import Dashboard from "./Dashboard";
 import KanbasNavigation from "./Navigation";
 import Courses from "./Courses";
-import "./style.css";
+import "./styles.css";
 
 export default function Kanbas() {
   return (
-    <div id="wd-kanbas" className="wd-main-content-offset p-3">
+    <div id="wd-kanbas">
       <KanbasNavigation />
-      <div>
+      <div className="wd-main-content-offset p-3">
         <Routes>
           <Route path="/" element={<Navigate to="/Kanbas/Account" />} />
           <Route path="/Account/*" element={<Account />} />
