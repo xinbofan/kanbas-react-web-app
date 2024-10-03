@@ -18,12 +18,11 @@ import ScreenSizeLabel from "./ScreenSizeLabel";
 import BootstrapTables from "./BootstrapTables";
 import BootstrapLists from "./BootstrapLists";
 import BootstrapForms from "./BootstrapForms";
-import BoorstrapNavigation from "./BootstrapNavigation";
+import BootstrapNavigation from "./BootstrapNavigation";
 
 export default function Lab2() {
   return (
     <div className="container">
-      {" "}
       {/**id="wd-lab2" */}
       <h2>Lab 2 - Cascading Style Sheets</h2>
       <h3>Styling with the STYLE attribute</h3>
@@ -95,7 +94,7 @@ export default function Lab2() {
       <BootstrapTables />
       <BootstrapLists />
       <BootstrapForms />
-      <BoorstrapNavigation />
+      <BootstrapNavigation />
     </div>
   );
 }
