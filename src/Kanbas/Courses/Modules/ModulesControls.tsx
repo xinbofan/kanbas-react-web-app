@@ -5,17 +5,11 @@ export default function ModulesControls() {
   return (
     <div id="wd-modules-controls" className="text-nowrap">
       <button
-        id="wd-collapse-all"
+        id="wd-add-module-btn"
         className="btn btn-lg btn-danger me-1 float-end"
       >
-        Collapse All
-      </button>
-
-      <button
-        id="wd-view-progress"
-        className="btn btn-lg btn-danger me-1 float-end"
-      >
-        View Progress
+        <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
+        Module
       </button>
 
       <div className="dropdown d-inline me-1 float-end">
@@ -77,18 +71,21 @@ export default function ModulesControls() {
               wd-unpublish-modules-only with labels Unpublish all modules and items
               and Unpublish modules only */}
         </ul>
-
-        <button
-          id="wd-add-module-btn"
-          className="btn btn-lg btn-danger me-1 float-end"
-        >
-          <FaPlus
-            className="position-relative me-2"
-            style={{ bottom: "1px" }}
-          />
-          Module
-        </button>
       </div>
+      <button
+        id="wd-view-progress"
+        className="btn btn-lg btn-danger me-1 float-end"
+      >
+        View Progress
+      </button>
+
+      <button
+        id="wd-collapse-all"
+        className="btn btn-lg btn-danger me-1 float-end"
+      >
+        Collapse All
+      </button>
+
       {/* Implement the View Progress and Collapse All buttons with IDs wd-view-progress and wd-collapse-all */}
     </div>
   );
