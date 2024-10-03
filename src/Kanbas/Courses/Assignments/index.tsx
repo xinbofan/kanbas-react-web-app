@@ -1,13 +1,14 @@
 import React from "react";
 import { MdOutlineAssignment } from "react-icons/md";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { AiOutlineCheckCircle } from "react-icons/ai";
-import { FaGripVertical } from "react-icons/fa";
+import { BsGripVertical } from "react-icons/bs";
+import LessonControlButtons from "../Modules/LessonControlButtons";
+import { CiSearch } from "react-icons/ci";
 
 export default function Assignments() {
   return (
     <div id="wd-assignments" className="p-3">
       <div className="d-flex justify-content-between align-items-center mb-3">
+        <CiSearch className="me-2 fs-3" />
         <input
           id="wd-search-assignment"
           placeholder="Search..."
@@ -30,7 +31,7 @@ export default function Assignments() {
       <ul id="wd-assignment-list" className="list-group">
         <li className="list-group-item d-flex justify-content-between align-items-start">
           <div className="d-flex align-items-center">
-            <FaGripVertical className="text-muted me-2" />
+            <BsGripVertical className="me-2 fs-3" />
             <MdOutlineAssignment className="text-success fs-4 me-2" />
             <div>
               <a
@@ -47,14 +48,13 @@ export default function Assignments() {
             </div>
           </div>
           <div className="d-flex align-items-center">
-            <AiOutlineCheckCircle className="text-success fs-4 me-3" />
-            <BsThreeDotsVertical className="text-muted" />
+            <LessonControlButtons />
           </div>
         </li>
 
         <li className="list-group-item d-flex justify-content-between align-items-start">
           <div className="d-flex align-items-center">
-            <FaGripVertical className="text-muted me-2" />
+            <BsGripVertical className="me-2 fs-3" />
             <MdOutlineAssignment className="text-success fs-4 me-2" />
             <div>
               <a
@@ -71,14 +71,13 @@ export default function Assignments() {
             </div>
           </div>
           <div className="d-flex align-items-center">
-            <AiOutlineCheckCircle className="text-success fs-4 me-3" />
-            <BsThreeDotsVertical className="text-muted" />
+            <LessonControlButtons />
           </div>
         </li>
 
         <li className="list-group-item d-flex justify-content-between align-items-start">
           <div className="d-flex align-items-center">
-            <FaGripVertical className="text-muted me-2" />
+            <BsGripVertical className="me-2 fs-3" />
             <MdOutlineAssignment className="text-success fs-4 me-2" />
             <div>
               <a
@@ -95,8 +94,7 @@ export default function Assignments() {
             </div>
           </div>
           <div className="d-flex align-items-center">
-            <AiOutlineCheckCircle className="text-success fs-4 me-3" />
-            <BsThreeDotsVertical className="text-muted" />
+            <LessonControlButtons />
           </div>
         </li>
       </ul>
