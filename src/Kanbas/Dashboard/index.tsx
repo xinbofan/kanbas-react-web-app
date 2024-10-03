@@ -1,12 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 export default function Dashboard() {
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
       <h2 id="wd-dashboard-published">Published Courses (12)</h2> <hr />
-      <div id="wd-dashboard-courses">
-        <div className="wd-dashboard-course">
+      <div
+        id="wd-dashboard-courses"
+        className="row row-cols-1 row-cols-md-4 g-4"
+      >
+        <div className="wd-dashboard-course col" style={{ width: "300px" }}>
           <Link
             className="wd-dashboard-course-link"
             to="/Kanbas/Courses/1234/Home"
@@ -22,7 +26,7 @@ export default function Dashboard() {
           </Link>
         </div>
 
-        <div className="wd-dashboard-course">
+        <div className="wd-dashboard-course col" style={{ width: "300px" }}>
           <Link
             className="wd-dashboard-course-link"
             to="/Kanbas/Courses/1234/Home"
@@ -38,7 +42,7 @@ export default function Dashboard() {
           </Link>
         </div>
 
-        <div className="wd-dashboard-course">
+        <div className="wd-dashboard-course col" style={{ width: "300px" }}>
           <Link
             className="wd-dashboard-course-link"
             to="/Kanbas/Courses/1234/Home"
@@ -54,7 +58,7 @@ export default function Dashboard() {
           </Link>
         </div>
 
-        <div className="wd-dashboard-course">
+        <div className="wd-dashboard-course col" style={{ width: "300px" }}>
           <Link
             className="wd-dashboard-course-link"
             to="/Kanbas/Courses/1234/Home"
@@ -68,7 +72,7 @@ export default function Dashboard() {
           </Link>
         </div>
 
-        <div className="wd-dashboard-course">
+        <div className="wd-dashboard-course col" style={{ width: "300px" }}>
           <Link
             className="wd-dashboard-course-link"
             to="/Kanbas/Courses/1234/Home"
@@ -77,14 +81,14 @@ export default function Dashboard() {
             <div>
               <h5>CS0004 CPP</h5>
               <p className="wd-dashboard-course-title">
-                No one really understand CPP
+                No one really understands CPP
               </p>
               <button> Go </button>
             </div>
           </Link>
         </div>
 
-        <div className="wd-dashboard-course">
+        <div className="wd-dashboard-course col" style={{ width: "300px" }}>
           <Link
             className="wd-dashboard-course-link"
             to="/Kanbas/Courses/1234/Home"
@@ -100,7 +104,7 @@ export default function Dashboard() {
           </Link>
         </div>
 
-        <div className="wd-dashboard-course">
+        <div className="wd-dashboard-course col" style={{ width: "300px" }}>
           <Link
             className="wd-dashboard-course-link"
             to="/Kanbas/Courses/1234/Home"
