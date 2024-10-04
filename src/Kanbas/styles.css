@@ -33,3 +33,17 @@ body * {
 .wd-lesson {
   border-left: 3px solid green !important;
 }
+
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.dropdown-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
