@@ -1,7 +1,7 @@
 import React from "react";
 import { FaAngleDown } from "react-icons/fa6";
 import { FaCalendarDays } from "react-icons/fa6";
-import "./index.css";
+import "../../../styles.css";
 
 export default function AssignmentEditor() {
   return (
