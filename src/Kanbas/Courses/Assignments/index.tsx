@@ -3,6 +3,8 @@ import { MdOutlineAssignment } from "react-icons/md";
 import { BsGripVertical } from "react-icons/bs";
 import LessonControlButtons from "../Modules/LessonControlButtons";
 import { CiSearch } from "react-icons/ci";
+import { GoTriangleDown } from "react-icons/go";
+import { IoEllipsisVertical } from "react-icons/io5";
 
 export default function Assignments() {
   return (
@@ -27,18 +29,21 @@ export default function Assignments() {
         <h3 id="wd-assignments-title" className="mb-0">
           ASSIGNMENTS
         </h3>
-        <span className="text-muted">40% of Total</span>
-        <button className="btn btn-outline-secondary">+</button>
+        <span className="badge bg-light text-muted px-2 py-1 rounded-pill">
+          40% of Total
+        </span>
+        <button className="btn btn-link">+</button>
+        <IoEllipsisVertical className="fs-4" />
       </div>
 
       <ul id="wd-assignment-list" className="list-group">
-        <li className="list-group-item d-flex justify-content-between align-items-start">
+        <li className="wd-assignment-list-item list-group-item d-flex justify-content-between align-items-start">
           <div className="d-flex align-items-center">
             <BsGripVertical className="me-2 fs-3" />
             <MdOutlineAssignment className="text-success fs-4 me-2" />
             <div>
               <a
-                className="fw-bold text-dark"
+                className="wd-assignment-link fw-bold text-dark"
                 href="#/Kanbas/Courses/1234/Assignments/123"
               >
                 A1
