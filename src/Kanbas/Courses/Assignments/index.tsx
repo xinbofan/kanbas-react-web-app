@@ -26,87 +26,81 @@ export default function Assignments() {
         </div>
       </div>
 
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <h3 id="wd-assignments-title" className="mb-0">
-          ASSIGNMENTS
-        </h3>
-        <span className="badge bg-light text-muted px-2 py-1 rounded-pill">
-          40% of Total
-        </span>
-        <button className="btn btn-link">+</button>
-        <IoEllipsisVertical className="fs-4" />
-      </div>
-
-      <ul id="wd-assignment-list" className="list-group">
-        <li className="wd-assignment-list-item list-group-item d-flex justify-content-between align-items-start">
-          <div className="d-flex align-items-center">
+      {/** */}
+      <ul id="wd-assignments" className="list-group rounded-0">
+        <li className="wd-assignment-title list-group-item p-0 mb-5 fs-5 border-gray">
+          <div className="wd-title p-3 ps-2 bg-secondary">
             <BsGripVertical className="me-2 fs-3" />
-            <MdOutlineAssignment className="text-success fs-4 me-2" />
-            <div>
-              <a
-                className="wd-assignment-link fw-bold text-dark"
-                href="#/Kanbas/Courses/1234/Assignments/123"
-              >
-                A1
-              </a>
-              <p className="mb-0 text-danger">Multiple Modules</p>
-              <small className="text-muted">
-                Not available until May 6 at 12:00am | Due May 13 at 11:59pm |
-                100 pts
-              </small>
-            </div>
+            <GoTriangleDown className="me-2 fs-3" />
+            ASSIGNMENT{" "}
+            <span className="badge bg-light text-muted px-2 py-1 rounded-pill">
+              40% of Total
+            </span>
+            <button className="btn btn-link">+</button>
+            <IoEllipsisVertical className="fs-4" />
           </div>
-          <div className="d-flex align-items-center">
-            <LessonControlButtons />
-          </div>
-        </li>
+          <ul className="wd-assignment-content list-group rounded-0">
+            <li className="wd-assignment list-group-item p-3 ps-1">
+              <BsGripVertical className="me-2 fs-3" />
+              <MdOutlineAssignment className="me-2 fs-3" />
+              <div>
+                <a
+                  className="wd-assignment-link fw-bold text-dark"
+                  href="#/Kanbas/Courses/1234/Assignments/123"
+                >
+                  A1
+                </a>
+                <p className="mb-0 text-danger">Multiple Modules</p>
+                <small className="text-muted">
+                  Not available until May 6 at 12:00am | Due May 13 at 11:59pm |
+                  100 pts
+                </small>
+                <LessonControlButtons />
+              </div>
+            </li>
 
-        <li className="list-group-item d-flex justify-content-between align-items-start">
-          <div className="d-flex align-items-center">
-            <BsGripVertical className="me-2 fs-3" />
-            <MdOutlineAssignment className="text-success fs-4 me-2" />
-            <div>
-              <a
-                className="fw-bold text-dark"
-                href="#/Kanbas/Courses/1234/Assignments/124"
-              >
-                A2
-              </a>
-              <p className="mb-0 text-danger">Multiple Modules</p>
-              <small className="text-muted">
-                Not available until May 13 at 12:00am | Due May 20 at 11:59pm |
-                100 pts
-              </small>
-            </div>
-          </div>
-          <div className="d-flex align-items-center">
-            <LessonControlButtons />
-          </div>
-        </li>
+            <li className="wd-assignment list-group-item p-3 ps-1">
+              <BsGripVertical className="me-2 fs-3" />
+              <MdOutlineAssignment className="me-2 fs-3" />
+              <div>
+                <a
+                  className="wd-assignment-link fw-bold text-dark"
+                  href="#/Kanbas/Courses/1234/Assignments/123"
+                >
+                  A2
+                </a>
+                <p className="mb-0 text-danger">Multiple Modules</p>
+                <small className="text-muted">
+                  Not available until May 13 at 12:00am | Due May 20 at 11:59pm
+                  | 100 pts
+                </small>
+                <LessonControlButtons />
+              </div>
+            </li>
 
-        <li className="list-group-item d-flex justify-content-between align-items-start">
-          <div className="d-flex align-items-center">
-            <BsGripVertical className="me-2 fs-3" />
-            <MdOutlineAssignment className="text-success fs-4 me-2" />
-            <div>
-              <a
-                className="fw-bold text-dark"
-                href="#/Kanbas/Courses/1234/Assignments/125"
-              >
-                A3
-              </a>
-              <p className="mb-0 text-danger">Multiple Modules</p>
-              <small className="text-muted">
-                Not available until May 20 at 12:00am | Due May 27 at 11:59pm |
-                100 pts
-              </small>
-            </div>
-          </div>
-          <div className="d-flex align-items-center">
-            <LessonControlButtons />
-          </div>
+            <li className="wd-assignment list-group-item p-3 ps-1">
+              <BsGripVertical className="me-2 fs-3" />
+              <MdOutlineAssignment className="me-2 fs-3" />
+              <div>
+                <a
+                  className="wd-assignment-link fw-bold text-dark"
+                  href="#/Kanbas/Courses/1234/Assignments/123"
+                >
+                  A3
+                </a>
+                <p className="mb-0 text-danger">Multiple Modules</p>
+                <small className="text-muted">
+                  Not available until May 20 at 12:00am | Due May 27 at 11:59pm
+                  | 100 pts
+                </small>
+                <LessonControlButtons />
+              </div>
+            </li>
+          </ul>
         </li>
       </ul>
+
+      {/** */}
     </div>
   );
 }
