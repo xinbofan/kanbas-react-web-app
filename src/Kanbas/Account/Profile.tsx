@@ -16,6 +16,7 @@ export default function Profile() {
         value="123"
         placeholder="password"
         type="password"
+        className="form-control mb-2"
       />
 
       <input
