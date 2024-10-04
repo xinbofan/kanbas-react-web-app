@@ -12,6 +12,7 @@ export default function Assignments() {
       <div className="d-flex justify-content-between align-items-center mb-3">
         <div className="search-container w-50 d-flex align-items-center border rounded">
           <CiSearch className="me-2 fs-3" />
+          <GoTriangleDown className="me-2 fs-3" />
           <input
             id="wd-search-assignment"
             placeholder="Search..."
