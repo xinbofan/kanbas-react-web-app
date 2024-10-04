@@ -10,7 +10,7 @@ export default function Profile() {
         placeholder="username"
         className="form-control mb-2"
       />
-      <br />
+
       <input
         id="wd-password"
         value="123"

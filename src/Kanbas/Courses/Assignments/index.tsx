@@ -8,14 +8,17 @@ export default function Assignments() {
   return (
     <div id="wd-assignments" className="p-3">
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <CiSearch className="me-2 fs-3" />
-        <input
-          id="wd-search-assignment"
-          placeholder="Search..."
-          className="form-control w-50"
-        />
+        <div className="search-container w-50 d-flex align-items-center border rounded">
+          <CiSearch className="me-2 fs-3" />
+          <input
+            id="wd-search-assignment"
+            placeholder="Search..."
+            className="form-control border-0"
+          />
+        </div>
+
         <div>
-          <button className="btn btn-outline-secondary me-2">+ Group</button>
+          <button className="btn btn-secondary me-2">+ Group</button>
           <button className="btn btn-danger">+ Assignment</button>
         </div>
       </div>

@@ -11,22 +11,8 @@ export default function AccountNavigation() {
         Signin{" "}
       </Link>{" "}
       <br />
-      <Link
-        to={`/Kanbas/Account/Signup`}
-        className="list-group-item active border border-0"
-      >
-        {" "}
-        Signup{" "}
-      </Link>{" "}
-      <br />
-      <Link
-        to={`/Kanbas/Account/Profile`}
-        className="list-group-item active border border-0"
-      >
-        {" "}
-        Profile{" "}
-      </Link>{" "}
-      <br />
+      <Link to={`/Kanbas/Account/Signup`}> Signup </Link> <br />
+      <Link to={`/Kanbas/Account/Profile`}> Profile </Link> <br />
     </div>
   );
 }
