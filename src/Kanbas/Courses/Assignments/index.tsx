@@ -40,7 +40,7 @@ export default function Assignments() {
             <AssignmentControlButton />
           </div>
           <ul className="wd-assignment-content list-group rounded-0">
-            <li className="wd-assignment list-group-item p-3 ps-1 d-flex align-items-center justify-content-between">
+            <li className="wd-assignment list-group-item p-3 ps-1 d-flex align-items-center">
               <BsGripVertical className="me-2 fs-3" />
               <MdOutlineAssignment className="me-2 fs-3" />
               <div>
