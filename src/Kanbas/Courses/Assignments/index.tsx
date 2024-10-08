@@ -63,7 +63,7 @@ export default function Assignments() {
                     11:59pm | 100 pts
                   </small>
                 </div>
-                <div className="ms-auto">
+                <div className="ms-auto d-flex align-items-center">
                   <LessonControlButtons />
                 </div>
               </div>
