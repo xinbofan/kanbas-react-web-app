@@ -40,25 +40,26 @@ export default function Assignments() {
             <AssignmentControlButton />
           </div>
           <ul className="wd-assignment-content list-group rounded-0">
-            <li className="wd-assignment list-group-item p-3 ps-1">
+            <li className="wd-assignment list-group-item p-3 ps-1 d-flex align-items-center justify-content-between">
               <BsGripVertical className="me-2 fs-3" />
               <MdOutlineAssignment className="me-2 fs-3" />
-              <>
+              <div>
                 <a
                   className="wd-assignment-link fw-bold text-dark"
                   href="#/Kanbas/Courses/1234/Assignments/123"
                 >
                   A1
                 </a>
-                <p className="mb-0 text-muted">
-                  <span style={{ color: "red" }}>Multiple Modules </span>|{" "}
-                  <span style={{ color: "grey" }}>Not available until </span>May
-                  6 at 12:00am |<span style={{ color: "grey" }}> Due </span>May
-                  13 at 11:59pm | 100 pts
-                </p>
+                <small className="mb-0 text-muted">
+                  <span className="text-danger">Multiple Modules </span>|{" "}
+                  <span className="font-weight-bold">Not available until </span>
+                  May 6 at 12:00am |
+                  <span className="font-weight-bold"> Due </span>May 13 at
+                  11:59pm | 100 pts
+                </small>
 
                 <LessonControlButtons />
-              </>
+              </div>
             </li>
 
             <li className="wd-assignment list-group-item p-3 ps-1">
