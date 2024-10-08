@@ -41,8 +41,8 @@ export default function Assignments() {
           </div>
 
           <ul className="wd-assignment-content list-group rounded-0">
-            <li className="wd-assignment list-group-item p-3 ps-1 d-flex align-items-center justify-content-between">
-              <div className="d-flex align-items-center">
+            <li className="wd-assignment list-group-item p-3 ps-1 d-flex align-items-center">
+              <div className="d-flex align-items-center flex-grow-1">
                 <BsGripVertical className="me-2 fs-3" />
                 <MdOutlineAssignment className="me-2 fs-3" />
                 <div>
@@ -63,7 +63,10 @@ export default function Assignments() {
                     11:59pm | 100 pts
                   </small>
                 </div>
-                <div className="ms-auto d-flex align-items-center">
+                <div
+                  className="d-flex align-items-center"
+                  style={{ marginLeft: "auto" }}
+                >
                   <LessonControlButtons />
                 </div>
               </div>
