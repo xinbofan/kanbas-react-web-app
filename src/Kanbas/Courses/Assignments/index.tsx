@@ -49,7 +49,7 @@ export default function Assignments() {
                   href="#/Kanbas/Courses/1234/Assignments/123"
                 >
                   A1
-                </a>
+                </a> <br/>
                 <small className="mb-0 text-muted">
                   <span className="text-danger">Multiple Modules </span>|{" "}
                   <span className="font-weight-bold">Not available until </span>
@@ -57,8 +57,9 @@ export default function Assignments() {
                   <span className="font-weight-bold"> Due </span>May 13 at
                   11:59pm | 100 pts
                 </small>
-
+                <div className="ms-auto">
                 <LessonControlButtons />
+                <div/>
               </div>
             </li>
 
