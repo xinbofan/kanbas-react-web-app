@@ -72,7 +72,7 @@ export default function Assignments() {
               </div>
             </li>
 
-            <li>
+            <li className="wd-assignment list-group-item p-3 ps-1 d-flex align-items-center">
               <div className="d-flex align-items-center flex-grow-1">
                 <BsGripVertical className="me-2 fs-3" />
                 <MdOutlineAssignment className="me-2 fs-3 text-success" />
@@ -103,7 +103,7 @@ export default function Assignments() {
               </div>
             </li>
 
-            <li>
+            <li className="wd-assignment list-group-item p-3 ps-1 d-flex align-items-center">
               <div className="d-flex align-items-center flex-grow-1">
                 <BsGripVertical className="me-2 fs-3" />
                 <MdOutlineAssignment className="me-2 fs-3 text-success" />
