@@ -44,7 +44,7 @@ export default function Assignments() {
             <li className="wd-assignment list-group-item p-3 ps-1 d-flex align-items-center">
               <div className="d-flex align-items-center flex-grow-1">
                 <BsGripVertical className="me-2 fs-3" />
-                <MdOutlineAssignment className="me-2 fs-3" />
+                <MdOutlineAssignment className="me-2 fs-3 text-success" />
                 <div>
                   <a
                     className="wd-assignment-link fw-bold text-dark"
@@ -72,41 +72,65 @@ export default function Assignments() {
               </div>
             </li>
 
-            <li className="wd-assignment list-group-item p-3 ps-1">
-              <BsGripVertical className="me-2 fs-3" />
-              <MdOutlineAssignment className="me-2 fs-3" />
-              <div>
-                <a
-                  className="wd-assignment-link fw-bold text-dark"
-                  href="#/Kanbas/Courses/1234/Assignments/123"
+            <li>
+              <div className="d-flex align-items-center flex-grow-1">
+                <BsGripVertical className="me-2 fs-3" />
+                <MdOutlineAssignment className="me-2 fs-3 text-success" />
+                <div>
+                  <a
+                    className="wd-assignment-link fw-bold text-dark"
+                    href="#/Kanbas/Courses/1234/Assignments/123"
+                  >
+                    A2
+                  </a>{" "}
+                  <br />
+                  <small className="mb-0 text-muted">
+                    <span className="text-danger">Multiple Modules </span>|{" "}
+                    <span className="font-weight-bold">
+                      Not available until{" "}
+                    </span>
+                    May 13 at 12:00am |
+                    <span className="font-weight-bold"> Due </span>May 20 at
+                    11:59pm | 100 pts
+                  </small>
+                </div>
+                <div
+                  className="d-flex align-items-center"
+                  style={{ marginLeft: "auto" }}
                 >
-                  A2
-                </a>
-                <p className="mb-0 text-danger">Multiple Modules</p>
-                <small className="text-muted">
-                  Not available until May 13 at 12:00am | Due May 20 at 11:59pm
-                  | 100 pts
-                </small>
-                <LessonControlButtons />
+                  <LessonControlButtons />
+                </div>
               </div>
             </li>
 
-            <li className="wd-assignment list-group-item p-3 ps-1">
-              <BsGripVertical className="me-2 fs-3" />
-              <MdOutlineAssignment className="me-2 fs-3" />
-              <div>
-                <a
-                  className="wd-assignment-link fw-bold text-dark"
-                  href="#/Kanbas/Courses/1234/Assignments/123"
+            <li>
+              <div className="d-flex align-items-center flex-grow-1">
+                <BsGripVertical className="me-2 fs-3" />
+                <MdOutlineAssignment className="me-2 fs-3 text-success" />
+                <div>
+                  <a
+                    className="wd-assignment-link fw-bold text-dark"
+                    href="#/Kanbas/Courses/1234/Assignments/123"
+                  >
+                    A3
+                  </a>{" "}
+                  <br />
+                  <small className="mb-0 text-muted">
+                    <span className="text-danger">Multiple Modules </span>|{" "}
+                    <span className="font-weight-bold">
+                      Not available until{" "}
+                    </span>
+                    May 20 at 12:00am |
+                    <span className="font-weight-bold"> Due </span>May 27 at
+                    11:59pm | 100 pts
+                  </small>
+                </div>
+                <div
+                  className="d-flex align-items-center"
+                  style={{ marginLeft: "auto" }}
                 >
-                  A3
-                </a>
-                <p className="mb-0 text-danger">Multiple Modules</p>
-                <small className="text-muted">
-                  Not available until May 20 at 12:00am | Due May 27 at 11:59pm
-                  | 100 pts
-                </small>
-                <LessonControlButtons />
+                  <LessonControlButtons />
+                </div>
               </div>
             </li>
           </ul>
