@@ -92,14 +92,14 @@ export default function AssignmentEditor() {
           <td>
             <div className="submission-type-container border p-3 rounded">
               <div className="mb-3">
-                <label htmlFor="wd-submission-type" className="form-label">
+                {/*<label htmlFor="wd-submission-type" className="form-label">
                   Submission Type
-                </label>
+                </label>*/}
                 <div className="dropdown-container">
                   <select id="wd-submission-type" className="form-select">
                     <option value="Online">Online</option>
                   </select>
-                  <FaAngleDown className="dropdown-icon" />
+                  {/*<FaAngleDown className="dropdown-icon" />*/}
                 </div>
               </div>
 
