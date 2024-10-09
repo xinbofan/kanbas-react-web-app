@@ -90,77 +90,84 @@ export default function AssignmentEditor() {
             <label htmlFor="wd-submission-type">Submission Type</label>
           </td>
           <td>
-            <div className="dropdown-container">
-              <select id="wd-submission-type" className="form-control mb-2">
-                <option value="Online">Online</option>
-              </select>
-              <FaAngleDown className="dropdown-icon" />
-            </div>
-          </td>
-        </tr>
+            <div className="submission-type-container border p-3 rounded">
+              <div className="mb-3">
+                <label htmlFor="wd-submission-type" className="form-label">
+                  Submission Type
+                </label>
+                <div className="dropdown-container">
+                  <select id="wd-submission-type" className="form-select">
+                    <option value="Online">Online</option>
+                  </select>
+                  <FaAngleDown className="dropdown-icon" />
+                </div>
+              </div>
 
-        <tr>
-          <td align="right" valign="top">
-            <strong>Online Entry Options</strong>
-          </td>
-          <td>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="wd-text-entry"
-                className="form-check-input"
-              />
-              <label htmlFor="wd-text-entry" className="form-check-label">
-                Text Entry
-              </label>
-            </div>
+              <div className="mb-3">
+                <strong>Online Entry Options</strong>
+              </div>
 
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="wd-website-url"
-                className="form-check-input"
-                defaultChecked
-              />
-              <label htmlFor="wd-website-url" className="form-check-label">
-                Website URL
-              </label>
-            </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="wd-text-entry"
+                  className="form-check-input"
+                />
+                <label htmlFor="wd-text-entry" className="form-check-label">
+                  Text Entry
+                </label>
+              </div>
 
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="wd-media-recordings"
-                className="form-check-input"
-              />
-              <label htmlFor="wd-media-recordings" className="form-check-label">
-                Media Recordings
-              </label>
-            </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="wd-website-url"
+                  className="form-check-input"
+                  defaultChecked
+                />
+                <label htmlFor="wd-website-url" className="form-check-label">
+                  Website URL
+                </label>
+              </div>
 
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="wd-student-annotation"
-                className="form-check-input"
-              />
-              <label
-                htmlFor="wd-student-annotation"
-                className="form-check-label"
-              >
-                Student Annotation
-              </label>
-            </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="wd-media-recordings"
+                  className="form-check-input"
+                />
+                <label
+                  htmlFor="wd-media-recordings"
+                  className="form-check-label"
+                >
+                  Media Recordings
+                </label>
+              </div>
 
-            <div className="form-check">
-              <input
-                type="checkbox"
-                id="wd-file-upload"
-                className="form-check-input"
-              />
-              <label htmlFor="wd-file-upload" className="form-check-label">
-                File Uploads
-              </label>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="wd-student-annotation"
+                  className="form-check-input"
+                />
+                <label
+                  htmlFor="wd-student-annotation"
+                  className="form-check-label"
+                >
+                  Student Annotation
+                </label>
+              </div>
+
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  id="wd-file-upload"
+                  className="form-check-input"
+                />
+                <label htmlFor="wd-file-upload" className="form-check-label">
+                  File Uploads
+                </label>
+              </div>
             </div>
           </td>
         </tr>
