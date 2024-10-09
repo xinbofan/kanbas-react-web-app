@@ -92,14 +92,10 @@ export default function AssignmentEditor() {
           <td>
             <div className="submission-type-container border p-3 rounded">
               <div className="mb-3">
-                {/*<label htmlFor="wd-submission-type" className="form-label">
-                  Submission Type
-                </label>*/}
                 <div className="dropdown-container">
                   <select id="wd-submission-type" className="form-select">
                     <option value="Online">Online</option>
                   </select>
-                  {/*<FaAngleDown className="dropdown-icon" />*/}
                 </div>
               </div>
 
@@ -172,24 +168,23 @@ export default function AssignmentEditor() {
           </td>
         </tr>
 
-        <tr>
-          <td align="right" valign="top">
-            <label htmlFor="wd-assign-to">Assign To</label>
-          </td>
-          <td>
+        <div className="assign-container border p-3 rounded">
+          {" "}
+          {/* 外层框 */}
+          <div className="mb-3">
+            <label htmlFor="wd-assign-to" className="form-label">
+              Assign To
+            </label>
             <input
               id="wd-assign-to"
               value="Everyone"
               className="form-control mb-2"
             />
-          </td>
-        </tr>
-
-        <tr>
-          <td align="right" valign="top">
-            <label htmlFor="wd-due-date">Due</label>
-          </td>
-          <td>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="wd-due-date" className="form-label">
+              Due
+            </label>
             <div className="input-group mb-2">
               <input
                 id="wd-due-date"
@@ -201,46 +196,43 @@ export default function AssignmentEditor() {
                 <FaCalendarDays />
               </span>
             </div>
-          </td>
-        </tr>
-
-        <tr>
-          <td align="right" valign="top">
-            <label htmlFor="wd-available-from">Available from</label>
-          </td>
-          <td>
-            <div className="input-group mb-2">
-              <input
-                id="wd-available-from"
-                type="text"
-                value="May 6, 2024, 12:00 AM"
-                className="form-control"
-              />
-              <span className="input-group-text">
-                <FaCalendarDays />
-              </span>
+          </div>
+          <div className="row mb-3">
+            <div className="col-md-6">
+              <label htmlFor="wd-available-from" className="form-label">
+                Available from
+              </label>
+              <div className="input-group">
+                <input
+                  id="wd-available-from"
+                  type="text"
+                  value="May 6, 2024, 12:00 AM"
+                  className="form-control"
+                />
+                <span className="input-group-text">
+                  <FaCalendarDays />
+                </span>
+              </div>
             </div>
-          </td>
-        </tr>
 
-        <tr>
-          <td align="right" valign="top">
-            <label htmlFor="wd-available-until">Until</label>
-          </td>
-          <td>
-            <div className="input-group mb-2">
-              <input
-                id="wd-available-until"
-                type="text"
-                value="May 20, 2024, 12:00 AM"
-                className="form-control"
-              />
-              <span className="input-group-text">
-                <FaCalendarDays />
-              </span>
+            <div className="col-md-6">
+              <label htmlFor="wd-available-until" className="form-label">
+                Until
+              </label>
+              <div className="input-group">
+                <input
+                  id="wd-available-until"
+                  type="text"
+                  value="May 20, 2024, 12:00 AM"
+                  className="form-control"
+                />
+                <span className="input-group-text">
+                  <FaCalendarDays />
+                </span>
+              </div>
             </div>
-          </td>
-        </tr>
+          </div>
+        </div>
       </table>
 
       <br />
