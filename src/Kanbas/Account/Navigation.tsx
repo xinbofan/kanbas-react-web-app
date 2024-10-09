@@ -12,7 +12,7 @@ export default function AccountNavigation() {
         Signin{" "}
       </Link>{" "}
       <Link
-        to="`/Kanbas/Account/Signup`"
+        to="/Kanbas/Account/Signup"
         id="wd-course-signup-link"
         className="list-group-item text-danger border border-0"
       >
@@ -20,7 +20,7 @@ export default function AccountNavigation() {
         Signup{" "}
       </Link>
       <Link
-        to="`/Kanbas/Account/Profile`"
+        to="/Kanbas/Account/Profile"
         id="wd-course-profile-link"
         className="list-group-item text-danger border border-0"
       >
