@@ -15,19 +15,18 @@ export default function CoursesNavigation() {
   ];
   return (
     <div id="wd-courses-navigation" className="wd list-group fs-5 rounded-0">
-      <div>
-        {links.map((link) => (
-          <Link
-            to={`/Kanbas/Courses/${cid}/${link}`}
-            className={`list-group-item border border-0
+      {links.map((link) => (
+        <Link
+          id={`"wd-course-${link}-link"`}
+          to={`/Kanbas/Courses/${cid}/${link}`}
+          className={`list-group-item border border-0
               ${pathname.includes(link) ? "active" : "text-danger"}`}
-            key={link}
-          >
-            {" "}
-            {link}{" "}
-          </Link>
-        ))}
-      </div>
+          key={link}
+        >
+          {" "}
+          {link}{" "}
+        </Link>
+      ))}
 
       {/** 
       <Link
