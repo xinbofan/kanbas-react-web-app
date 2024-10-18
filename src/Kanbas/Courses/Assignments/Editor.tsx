@@ -4,6 +4,7 @@ import { FaCalendarDays } from "react-icons/fa6";
 import "../../styles.css";
 import * as db from "../../Database";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function AssignmentEditor() {
   const { cid } = useParams();
@@ -259,8 +260,15 @@ export default function AssignmentEditor() {
 
           <br />
           <div className="d-flex justify-content-end">
-            <button className="btn btn-secondary me-2">Cancel</button>
-            <button className="btn btn-danger">Save</button>
+            <Link
+              to={`/courses/${cid}/assignments`}
+              className="btn btn-secondary me-2"
+            >
+              Cancel
+            </Link>
+            <Link to={`/courses/${cid}/assignments`} className="btn btn-danger">
+              Save
+            </Link>
           </div>
         </div>
       ))}
