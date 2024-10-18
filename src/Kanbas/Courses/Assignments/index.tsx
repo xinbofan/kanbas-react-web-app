@@ -44,39 +44,43 @@ export default function Assignments() {
             <AssignmentControlButton />
           </div>
 
-          {db.assignments
-            .filter((assignment: any) => assignment.course === cid)
-            .map((assignment: any) => (
-              <li className="wd-assignment list-group-item p-0 mb-5 fs-5 border-gray">
-                <BsGripVertical className="me-2 fs-3" />
-                <MdOutlineAssignment className="me-2 fs-3 text-success" />
+          <ul className="wd-assignment-content list-group rounded-0">
+            {db.assignments
+              .filter((assignment: any) => assignment.course === cid)
+              .map((assignment: any) => (
+                <li className="wd-assignment list-group-item p-3 ps-1 d-flex align-items-center">
+                  <div className="d-flex align-items-center flex-grow-1">
+                    <BsGripVertical className="me-2 fs-3" />
+                    <MdOutlineAssignment className="me-2 fs-3 text-success" />
 
-                <div>
-                  <a
-                    className="wd-assignment-link fw-bold text-dark"
-                    href={`#/Kanbas/Courses/${assignment.course}/Assignments/123`}
-                  >
-                    {assignment.title}
-                  </a>{" "}
-                  <br />
-                  <small className="mb-0 text-muted">
-                    <span className="text-danger">Multiple Modules </span>|{" "}
-                    <span className="font-weight-bold">
-                      Not available until{" "}
-                    </span>
-                    May 6 at 12:00am |
-                    <span className="font-weight-bold"> Due </span>May 13 at
-                    11:59pm | 100 pts
-                  </small>
-                </div>
-                <div
-                  className="d-flex align-items-center"
-                  style={{ marginLeft: "auto" }}
-                >
-                  <LessonControlButtons />
-                </div>
-              </li>
-            ))}
+                    <div>
+                      <a
+                        className="wd-assignment-link fw-bold text-dark"
+                        href={`#/Kanbas/Courses/${assignment.course}/Assignments/123`}
+                      >
+                        {assignment.title}
+                      </a>{" "}
+                      <br />
+                      <small className="mb-0 text-muted">
+                        <span className="text-danger">Multiple Modules </span>|{" "}
+                        <span className="font-weight-bold">
+                          Not available until{" "}
+                        </span>
+                        May 6 at 12:00am |
+                        <span className="font-weight-bold"> Due </span>May 13 at
+                        11:59pm | 100 pts
+                      </small>
+                    </div>
+                    <div
+                      className="d-flex align-items-center"
+                      style={{ marginLeft: "auto" }}
+                    >
+                      <LessonControlButtons />
+                    </div>
+                  </div>
+                </li>
+              ))}
+          </ul>
 
           {/** 
 
