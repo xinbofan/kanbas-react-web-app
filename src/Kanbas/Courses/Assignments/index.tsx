@@ -8,6 +8,7 @@ import { IoEllipsisVertical } from "react-icons/io5";
 import AssignmentControlButton from "./AssignmentControlButton";
 import * as db from "../../Database";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function Assignments() {
   const { cid } = useParams();
@@ -48,18 +49,21 @@ export default function Assignments() {
             {db.assignments
               .filter((assignment: any) => assignment.course === cid)
               .map((assignment: any) => (
-                <li className="wd-assignment list-group-item p-3 ps-1 d-flex align-items-center">
+                <li
+                  key={assignment._id}
+                  className="wd-assignment list-group-item p-3 ps-1 d-flex align-items-center"
+                >
                   <div className="d-flex align-items-center flex-grow-1">
                     <BsGripVertical className="me-2 fs-3" />
                     <MdOutlineAssignment className="me-2 fs-3 text-success" />
 
                     <div>
-                      <a
+                      <Link
                         className="wd-assignment-link fw-bold text-dark"
-                        href={`#/Kanbas/Courses/${assignment.course}/Assignments/123`}
+                        to={`#/Kanbas/Courses/${assignment.course}/Assignments/${assignment._id}`}
                       >
                         {assignment.title}
-                      </a>{" "}
+                      </Link>{" "}
                       <br />
                       <small className="mb-0 text-muted">
                         <span className="text-danger">Multiple Modules </span>|{" "}
