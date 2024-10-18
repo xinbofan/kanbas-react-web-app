@@ -48,10 +48,9 @@ export default function Assignments() {
             .filter((assignment: any) => assignment.course === cid)
             .map((assignment: any) => (
               <li className="wd-assignment list-group-item p-0 mb-5 fs-5 border-gray">
-                <div className="wd-title p-3 ps-2 bg-secondary">
-                  <BsGripVertical className="me-2 fs-3" />
-                  <MdOutlineAssignment className="me-2 fs-3 text-success" />
-                </div>
+                <BsGripVertical className="me-2 fs-3" />
+                <MdOutlineAssignment className="me-2 fs-3 text-success" />
+
                 <div>
                   <a
                     className="wd-assignment-link fw-bold text-dark"
@@ -69,6 +68,12 @@ export default function Assignments() {
                     <span className="font-weight-bold"> Due </span>May 13 at
                     11:59pm | 100 pts
                   </small>
+                </div>
+                <div
+                  className="d-flex align-items-center"
+                  style={{ marginLeft: "auto" }}
+                >
+                  <LessonControlButtons />
                 </div>
               </li>
             ))}
