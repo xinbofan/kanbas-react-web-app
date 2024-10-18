@@ -60,7 +60,7 @@ export default function Assignments() {
                     <div>
                       <Link
                         className="wd-assignment-link fw-bold text-dark"
-                        to={`#/Kanbas/Courses/${assignment.course}/Assignments/${assignment._id}`}
+                        to={`/Kanbas/Courses/${assignment.course}/Assignments/${assignment._id}`}
                       >
                         {assignment.title}
                       </Link>{" "}
