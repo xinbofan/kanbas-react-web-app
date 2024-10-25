@@ -8,7 +8,7 @@ export default function ArrayStateVariable() {
     setArray(array.filter((item, i) => i !== index));
   };
   return (
-    <div id="wd-array-state-variables" className="mt-4">
+    <div id="wd-array-state-variables" className="mt-4 ms-3">
       <h2>Array State Variable</h2>
       <button onClick={addElement} className="btn btn-success mb-3">
         Add Element
