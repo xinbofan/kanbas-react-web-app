@@ -8,12 +8,23 @@ export default function TodoItem({
   setTodo: (todo: { id: string; title: string }) => void;
 }) {
   return (
-    <li key={todo.id} className="list-group-item">
-      <button onClick={() => deleteTodo(todo.id)} id="wd-delete-todo-click">
+    <li
+      key={todo.id}
+      className="list-group-item d-flex flex-row-reverse justify-content-between align-items-center"
+    >
+      <button
+        onClick={() => deleteTodo(todo.id)}
+        id="wd-delete-todo-click"
+        className="btn btn-primary me-2"
+      >
         {" "}
         Delete{" "}
       </button>
-      <button onClick={() => setTodo(todo)} id="wd-set-todo-click">
+      <button
+        onClick={() => setTodo(todo)}
+        id="wd-set-todo-click"
+        className="btn btn-danger"
+      >
         {" "}
         Edit{" "}
       </button>
