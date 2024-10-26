@@ -10,25 +10,27 @@ export default function TodoItem({
   return (
     <li
       key={todo.id}
-      className="list-group-item d-flex flex-row-reverse justify-content-between align-items-center"
+      className="list-group-item d-flex  justify-content-between align-items-center"
     >
-      <button
-        onClick={() => deleteTodo(todo.id)}
-        id="wd-delete-todo-click"
-        className="btn btn-primary me-2"
-      >
-        {" "}
-        Delete{" "}
-      </button>
-      <button
-        onClick={() => setTodo(todo)}
-        id="wd-set-todo-click"
-        className="btn btn-danger"
-      >
-        {" "}
-        Edit{" "}
-      </button>
-      {todo.title}{" "}
+      <span>{todo.title}</span>
+      <div className="d-flex flex-row-reverse">
+        <button
+          onClick={() => deleteTodo(todo.id)}
+          id="wd-delete-todo-click"
+          className="btn btn-danger me-2"
+        >
+          {" "}
+          Delete{" "}
+        </button>
+        <button
+          onClick={() => setTodo(todo)}
+          id="wd-set-todo-click"
+          className="btn btn-primary"
+        >
+          {" "}
+          Edit{" "}
+        </button>
+      </div>
     </li>
   );
 }
