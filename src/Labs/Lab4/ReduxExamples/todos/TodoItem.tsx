@@ -17,7 +17,7 @@ export default function TodoItem({
         <button
           onClick={() => deleteTodo(todo.id)}
           id="wd-delete-todo-click"
-          className="btn btn-danger me-2"
+          className="btn btn-danger ms-2"
         >
           {" "}
           Delete{" "}
