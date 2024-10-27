@@ -1,23 +1,20 @@
-export default function TodoForm({
-  todo,
-  setTodo,
-  addTodo,
-  updateTodo,
-}: {
-  todo: { id: string; title: string };
-  setTodo: (todo: { id: string; title: string }) => void;
-  addTodo: (todo: { id: string; title: string }) => void;
-  updateTodo: (todo: { id: string; title: string }) => void;
-}) {
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addTodo, updateTodo, setTodo } from "./todosReducer";
+
+export default function TodoForm() {
+  const { todo } = useSelector((state: any) => state.todosReducer);
+  const dispatch = useDispatch();
+
   return (
     <li className="list-group-item d-flex  justify-content-between align-items-center">
       <input
         defaultValue={todo.title}
-        onChange={(e) => setTodo({ ...todo, title: e.target.value })}
+        onChange={(e) => dispatch(setTodo({ ...todo, title: e.target.value }))}
       />
       <div className="d-flex flex-row-reverse">
         <button
-          onClick={() => addTodo(todo)}
+          onClick={() => dispatch(addTodo(todo))}
           id="wd-add-todo-click"
           className="btn btn-success ms-2"
         >
@@ -25,7 +22,7 @@ export default function TodoForm({
           Add{" "}
         </button>
         <button
-          onClick={() => updateTodo(todo)}
+          onClick={() => dispatch(updateTodo(todo))}
           id="wd-update-todo-click"
           className="btn btn-warning"
         >

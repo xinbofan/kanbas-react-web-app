@@ -1,12 +1,14 @@
-export default function TodoItem({
-  todo,
-  deleteTodo,
-  setTodo,
-}: {
-  todo: { id: string; title: string };
-  deleteTodo: (id: string) => void;
-  setTodo: (todo: { id: string; title: string }) => void;
-}) {
+import React from "react";
+import { useDispatch } from "react-redux";
+import { deleteTodo, setTodo } from "./todosReducer";
+
+type Todo = {
+  id: string;
+  title: string;
+};
+export default function TodoItem({ todo }: { todo: Todo }) {
+  const dispatch = useDispatch();
+
   return (
     <li
       key={todo.id}
@@ -15,7 +17,7 @@ export default function TodoItem({
       <span>{todo.title}</span>
       <div className="d-flex flex-row-reverse">
         <button
-          onClick={() => deleteTodo(todo.id)}
+          onClick={() => dispatch(deleteTodo(todo.id))}
           id="wd-delete-todo-click"
           className="btn btn-danger ms-2"
         >
@@ -23,7 +25,7 @@ export default function TodoItem({
           Delete{" "}
         </button>
         <button
-          onClick={() => setTodo(todo)}
+          onClick={() => dispatch(setTodo(todo))}
           id="wd-set-todo-click"
           className="btn btn-primary"
         >
