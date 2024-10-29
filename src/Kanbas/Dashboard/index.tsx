@@ -60,7 +60,7 @@ export default function Dashboard({
       >
         {courses.map((course) => (
           <div key={course._id} className="col" style={{ width: "300px" }}>
-            <div className="card rounded">
+            <div className="card rounded h-100">
               <img
                 src={course.image || "/images/reactjs.jpg"}
                 className="card-img-top"
