@@ -66,11 +66,11 @@ export default function Dashboard({
                 className="card-img-top"
                 alt="Course"
               />
-              <div className="card-body">
+              <div className="card-body d-flex flex-column justify-content-between">
                 <h5 className="card-title">{course.name}</h5>
                 <p className="card-text">{course.description}</p>
 
-                <div className="card-body d-flex justify-content-between align-items-center">
+                <div className="d-flex justify-content-between align-items-center mt-3">
                   <Link
                     to={`/Kanbas/Courses/${course._id}/Home`}
                     className="btn btn-primary"
