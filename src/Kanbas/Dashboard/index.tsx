@@ -70,8 +70,10 @@ export default function Dashboard({
                 <h5 className="card-title">{course.name}</h5>
                 <p className="card-text">{course.description}</p>
 
-                <div className="d-flex justify-content-between align-items-center">
-                  <button className="btn btn-primary">Go </button>
+                <div className="card-footer d-flex justify-content-between align-items-center">
+                  <button className="btn btn-primary">
+                    <Link to={`/Courses/${course._id}`}>Go</Link>
+                  </button>
                   <div>
                     <button
                       onClick={(event) => {
