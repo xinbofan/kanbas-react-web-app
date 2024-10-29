@@ -60,39 +60,42 @@ export default function Dashboard({
       >
         {courses.map((course) => (
           <div key={course._id} className="col" style={{ width: "300px" }}>
-            <img
-              src={course.image || "/images/reactjs.jpg"}
-              className="card-img-top"
-              alt="Course"
-            />
-            <div className="card">
-              <h5 className="card-title">{course.name}</h5>
-              <p className="card-text">{course.description}</p>
-            </div>
-            <div className="d-flex justify-content-between align-items-center">
-              <button className="btn btn-primary">Go </button>
-              <div>
-                <button
-                  id="wd-edit-course-click"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    setCourse(course);
-                  }}
-                  className="btn btn-warning me-2 "
-                >
-                  Edit
-                </button>
+            <div className="card rounded">
+              <img
+                src={course.image || "/images/reactjs.jpg"}
+                className="card-img-top"
+                alt="Course"
+              />
+              <div className="card-body">
+                <h5 className="card-title">{course.name}</h5>
+                <p className="card-text">{course.description}</p>
 
-                <button
-                  onClick={(event) => {
-                    event.preventDefault();
-                    deleteCourse(course._id);
-                  }}
-                  className="btn btn-danger "
-                  id="wd-delete-course-click"
-                >
-                  Delete
-                </button>
+                <div className="d-flex justify-content-between align-items-center">
+                  <button className="btn btn-primary">Go </button>
+                  <div>
+                    <button
+                      onClick={(event) => {
+                        event.preventDefault();
+                        deleteCourse(course._id);
+                      }}
+                      className="btn btn-danger float-end"
+                      id="wd-delete-course-click"
+                    >
+                      Delete
+                    </button>
+
+                    <button
+                      id="wd-edit-course-click"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        setCourse(course);
+                      }}
+                      className="btn btn-warning me-2 float-end"
+                    >
+                      Edit
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
