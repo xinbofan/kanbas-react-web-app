@@ -67,9 +67,10 @@ export default function Dashboard({
                 alt="Course"
               />
               <div className="card-body d-flex flex-column justify-content-between">
-                <h5 className="card-title">{course.name}</h5>
-                <p className="card-text">{course.description}</p>
-
+                <div>
+                  <h5 className="card-title">{course.name}</h5>
+                  <p className="card-text">{course.description}</p>
+                </div>
                 <div className="d-flex justify-content-between align-items-center mt-3">
                   <Link
                     to={`/Kanbas/Courses/${course._id}/Home`}
