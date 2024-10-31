@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
+import { useSelector } from "react-redux";
 import * as db from "../Database";
 
 export default function Dashboard({
@@ -17,6 +19,9 @@ export default function Dashboard({
   deleteCourse: (course: any) => void;
   updateCourse: () => void;
 }) {
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const { enrollments } = db;
+
   return (
     <div className="p-4" id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
@@ -58,55 +63,63 @@ export default function Dashboard({
         className="row row-cols-1 row-cols-md-5 g-4"
         id="wd-dashboard-courses"
       >
-        {courses.map((course) => (
-          <div key={course._id} className="col" style={{ width: "300px" }}>
-            <div className="card rounded h-100">
-              <img
-                src={course.image || "/images/reactjs.jpg"}
-                className="card-img-top"
-                alt="Course"
-              />
-              <div className="card-body d-flex flex-column justify-content-between">
-                <div>
-                  <h5 className="card-title">{course.name}</h5>
-                  <p className="card-text">{course.description}</p>
-                </div>
-                <div className="d-flex justify-content-between align-items-center mt-3">
-                  <Link
-                    to={`/Kanbas/Courses/${course._id}/Home`}
-                    className="btn btn-primary"
-                  >
-                    Go
-                  </Link>
-
+        {courses
+          .filter((course) =>
+            enrollments.some(
+              (enrollment) =>
+                enrollment.user === currentUser._id &&
+                enrollment.course === course._id
+            )
+          )
+          .map((course) => (
+            <div key={course._id} className="col" style={{ width: "300px" }}>
+              <div className="card rounded h-100">
+                <img
+                  src={course.image || "/images/reactjs.jpg"}
+                  className="card-img-top"
+                  alt="Course"
+                />
+                <div className="card-body d-flex flex-column justify-content-between">
                   <div>
-                    <button
-                      onClick={(event) => {
-                        event.preventDefault();
-                        deleteCourse(course._id);
-                      }}
-                      className="btn btn-danger float-end"
-                      id="wd-delete-course-click"
+                    <h5 className="card-title">{course.name}</h5>
+                    <p className="card-text">{course.description}</p>
+                  </div>
+                  <div className="d-flex justify-content-between align-items-center mt-3">
+                    <Link
+                      to={`/Kanbas/Courses/${course._id}/Home`}
+                      className="btn btn-primary"
                     >
-                      Delete
-                    </button>
+                      Go
+                    </Link>
 
-                    <button
-                      id="wd-edit-course-click"
-                      onClick={(event) => {
-                        event.preventDefault();
-                        setCourse(course);
-                      }}
-                      className="btn btn-warning me-2 float-end"
-                    >
-                      Edit
-                    </button>
+                    <div>
+                      <button
+                        onClick={(event) => {
+                          event.preventDefault();
+                          deleteCourse(course._id);
+                        }}
+                        className="btn btn-danger float-end"
+                        id="wd-delete-course-click"
+                      >
+                        Delete
+                      </button>
+
+                      <button
+                        id="wd-edit-course-click"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          setCourse(course);
+                        }}
+                        className="btn btn-warning me-2 float-end"
+                      >
+                        Edit
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
