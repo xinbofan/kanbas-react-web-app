@@ -6,6 +6,7 @@ import { FaAngleDown } from "react-icons/fa6";
 import { FaCalendarDays } from "react-icons/fa6";
 
 export default function NewAssignment() {
+  const { courseId } = useParams();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [points, setPoints] = useState("");
@@ -25,10 +26,10 @@ export default function NewAssignment() {
         dueDate,
         availableFrom,
         availableUntil,
-        course: "${assignment.course}",
+        course: courseId,
       })
     );
-    navigate("/Kanbas/Courses/${assignment.course}/Assignments");
+    navigate("/Kanbas/Courses/${courseId}/Assignments");
   };
 
   return (
@@ -100,4 +101,7 @@ export default function NewAssignment() {
       </div>
     </div>
   );
+}
+function useParams(): { courseId: any } {
+  throw new Error("Function not implemented.");
 }
