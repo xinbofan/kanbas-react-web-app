@@ -12,11 +12,15 @@ export default function AssignmentEditor() {
   const { cid, aid } = useParams();
   const dispatch = useDispatch();
 
-  const assignment = useSelector((state: any) =>
-    state.assignments.find(
+  const assignment = useSelector((state: any) => {
+    const assignments = state.assignments;
+    if (!assignments || !Array.isArray(assignments)) {
+      return null;
+    }
+    return assignments.find(
       (assignment: any) => assignment.course === cid && assignment._id === aid
-    )
-  );
+    );
+  });
   console.log("Assignments from Redux:", assignment);
   const [name, setName] = useState(assignment ? assignment.title : "");
   const [description, setDescription] = useState(
