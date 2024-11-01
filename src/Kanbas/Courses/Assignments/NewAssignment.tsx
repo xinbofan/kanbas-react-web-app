@@ -5,7 +5,7 @@ import { addAssignment } from "./reducer";
 import { FaAngleDown } from "react-icons/fa6";
 import { FaCalendarDays } from "react-icons/fa6";
 
-export default function AssignmentEditor() {
+export default function NewAssignment() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [points, setPoints] = useState("");
