@@ -8,6 +8,7 @@ import "./styles.css";
 import * as db from "./Database";
 import { useState } from "react";
 import ProtectedRoute from "./Account/ProtectedRoute";
+import Editor from "./Courses/Assignments/Editor";
 
 export default function Kanbas() {
   const [courses, setCourses] = useState<any[]>(db.courses);
@@ -73,6 +74,7 @@ export default function Kanbas() {
 
           <Route path="/Calendar" element={<h1>Calendar</h1>} />
           <Route path="/Inbox" element={<h1>Inbox</h1>} />
+          <Route path="/Courses/:cid/Assignments/new" element={<Editor />} />
         </Routes>
       </div>
     </div>

@@ -48,7 +48,7 @@ export default function Assignments() {
             <span className="badge bg-light text-muted px-2 py-1 rounded-pill">
               40% of Total
             </span>
-            <AssignmentControlButton assignmentId={assignments._id} />
+            <AssignmentControlButton />
           </div>
 
           <ul className="wd-assignment-content list-group rounded-0">
