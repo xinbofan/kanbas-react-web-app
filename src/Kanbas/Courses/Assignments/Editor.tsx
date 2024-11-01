@@ -18,6 +18,10 @@ export default function AssignmentEditor() {
     )
   );
 
+  console.log("Course ID:", cid);
+  console.log("Assignment ID:", aid);
+  console.log("Assignment:", assignment);
+
   const [name, setName] = useState(assignment ? assignment.title : "");
   const [description, setDescription] = useState(
     assignment ? assignment.description : ""
