@@ -42,10 +42,11 @@ export default function NewAssignment() {
         className="form-control mb-2"
       />
 
-      <label htmlFor="wd-description">Description</label>
+      <label htmlFor="wd-description"></label>
       <textarea
         id="wd-description"
         value={description}
+        placeholder="Description"
         onChange={(e) => setDescription(e.target.value)}
         className="form-control mb-2"
       ></textarea>
@@ -60,13 +61,16 @@ export default function NewAssignment() {
       />
 
       <label htmlFor="wd-due-date">Due Date</label>
-      <input
-        id="wd-due-date"
-        type="text"
-        value={dueDate}
-        onChange={(e) => setDueDate(e.target.value)}
-        className="form-control mb-2"
-      />
+      <div>
+        <input
+          id="wd-due-date"
+          type="text"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+          className="form-control mb-2"
+        />
+        <FaCalendarDays />
+      </div>
 
       <label htmlFor="wd-available-from">Available From</label>
       <input
