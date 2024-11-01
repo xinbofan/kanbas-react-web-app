@@ -7,6 +7,7 @@ import { useParams } from "react-router";
 import * as db from "../../Database";
 import { addModule, editModule, updateModule, deleteModule } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
+import ProtectedFaculty from "../../Account/ProtectedFaculty";
 
 export default function Modules() {
   const { cid } = useParams();
@@ -16,14 +17,16 @@ export default function Modules() {
 
   return (
     <div className="wd-modules">
-      <ModulesControls
-        moduleName={moduleName}
-        setModuleName={setModuleName}
-        addModule={() => {
-          dispatch(addModule({ name: moduleName, course: cid }));
-          setModuleName("");
-        }}
-      />
+      <ProtectedFaculty>
+        <ModulesControls
+          moduleName={moduleName}
+          setModuleName={setModuleName}
+          addModule={() => {
+            dispatch(addModule({ name: moduleName, course: cid }));
+            setModuleName("");
+          }}
+        />
+      </ProtectedFaculty>
 
       <br />
       <br />
@@ -53,21 +56,24 @@ export default function Modules() {
                     defaultValue={module.name}
                   />
                 )}
-
-                <ModuleControlButtons
-                  moduleId={module._id}
-                  deleteModule={(moduleId) => {
-                    dispatch(deleteModule(moduleId));
-                  }}
-                  editModule={(moduleId) => dispatch(editModule(moduleId))}
-                />
+                <ProtectedFaculty>
+                  <ModuleControlButtons
+                    moduleId={module._id}
+                    deleteModule={(moduleId) => {
+                      dispatch(deleteModule(moduleId));
+                    }}
+                    editModule={(moduleId) => dispatch(editModule(moduleId))}
+                  />
+                </ProtectedFaculty>
               </div>
               {module.lessons && (
                 <ul className="wd-lessons list-group rounded-0">
                   {module.lessons.map((lesson: any) => (
                     <li className="wd-lesson list-group-item p-3 ps-1">
                       <BsGripVertical className="me-2 fs-3" /> {lesson.name}{" "}
-                      <LessonControlButtons />
+                      <ProtectedFaculty>
+                        <LessonControlButtons />
+                      </ProtectedFaculty>
                     </li>
                   ))}
                 </ul>

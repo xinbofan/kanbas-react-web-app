@@ -4,7 +4,7 @@ import { BsPlus } from "react-icons/bs";
 import { FaTrash } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
 
-export default function LessonControlButtons({
+export default function ModuleControlButtons({
   moduleId,
   deleteModule,
   editModule,

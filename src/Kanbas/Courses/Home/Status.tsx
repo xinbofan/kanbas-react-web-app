@@ -8,22 +8,25 @@ import { FaStream } from "react-icons/fa";
 import { MdOutlineAnnouncement } from "react-icons/md";
 import { TbReportAnalytics } from "react-icons/tb";
 import { IoIosNotificationsOutline } from "react-icons/io";
+import ProtectedFaculty from "../../Account/ProtectedFaculty";
 
 export default function CourseStatus() {
   return (
     <div id="wd-course-status" style={{ width: "300px" }}>
       <h2>Course Status</h2>
       <div className="d-flex">
-        <div className="w-50 pe-1">
-          <button className="btn btn-lg btn-secondary w-100 text-nowrap ">
-            <MdDoNotDisturbAlt className="me-2 fs-5" /> Unpublish{" "}
-          </button>
-        </div>
-        <div className="w-50">
-          <button className="btn btn-lg btn-success w-100">
-            <FaCheckCircle className="me-2 fs-5" /> Publish{" "}
-          </button>
-        </div>
+        <ProtectedFaculty>
+          <div className="w-50 pe-1">
+            <button className="btn btn-lg btn-secondary w-100 text-nowrap ">
+              <MdDoNotDisturbAlt className="me-2 fs-5" /> Unpublish{" "}
+            </button>
+          </div>
+          <div className="w-50">
+            <button className="btn btn-lg btn-success w-100">
+              <FaCheckCircle className="me-2 fs-5" /> Publish{" "}
+            </button>
+          </div>
+        </ProtectedFaculty>
       </div>
       <br />
 
