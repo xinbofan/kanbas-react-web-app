@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addAssignment } from "./reducer";
 import { FaAngleDown } from "react-icons/fa6";
@@ -29,7 +29,7 @@ export default function NewAssignment() {
         course: courseId,
       })
     );
-    navigate("/Kanbas/Courses/${courseId}/Assignments");
+    navigate(`/Kanbas/Courses/${courseId}/Assignments`);
   };
 
   return (
@@ -88,9 +88,7 @@ export default function NewAssignment() {
 
       <div className="d-flex justify-content-end">
         <button
-          onClick={() =>
-            navigate("/Kanbas/Courses/${assignment.course}/Assignments")
-          }
+          onClick={() => navigate(`/Kanbas/Courses/${courseId}/Assignments`)}
           className="btn btn-secondary me-2"
         >
           Cancel
@@ -101,7 +99,4 @@ export default function NewAssignment() {
       </div>
     </div>
   );
-}
-function useParams(): { courseId: any } {
-  throw new Error("Function not implemented.");
 }
