@@ -14,6 +14,7 @@ export default function AssignmentEditor() {
 
   const assignment = useSelector((state: any) => {
     const assignments = state.assignments;
+    console.log("Assignments from Redux:", assignments);
     if (!assignments || !Array.isArray(assignments)) {
       return null;
     }
