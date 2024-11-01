@@ -10,7 +10,6 @@ import { addAssignment, updateAssignment } from "./reducer";
 
 export default function AssignmentEditor() {
   const { cid, aid } = useParams();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const assignment = useSelector((state: any) =>
@@ -19,18 +18,22 @@ export default function AssignmentEditor() {
     )
   );
 
+  const [name, setName] = useState(assignment ? assignment.title : "");
+  const [description, setDescription] = useState(
+    assignment ? assignment.description : ""
+  );
+  const [points, setPoints] = useState(assignment ? assignment.points : "");
+  const [dueDate, setDueDate] = useState(assignment ? assignment.dueDate : "");
+  const [availableFrom, setAvailableFrom] = useState(
+    assignment ? assignment.availableFrom : ""
+  );
+  const [availableUntil, setAvailableUntil] = useState(
+    assignment ? assignment.availableUntil : ""
+  );
+
   if (!assignment) {
     return <div>Assignment not found</div>;
   }
-
-  const [name, setName] = useState(assignment.title);
-  const [description, setDescription] = useState(assignment.description);
-  const [points, setPoints] = useState(assignment.points);
-  const [dueDate, setDueDate] = useState(assignment.dueDate);
-  const [availableFrom, setAvailableFrom] = useState(assignment.availableFrom);
-  const [availableUntil, setAvailableUntil] = useState(
-    assignment.availableUntil
-  );
 
   const handleSave = () => {
     if (assignment) {
