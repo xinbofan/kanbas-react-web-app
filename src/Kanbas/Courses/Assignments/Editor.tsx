@@ -17,7 +17,7 @@ export default function AssignmentEditor() {
       (assignment: any) => assignment.course === cid && assignment._id === aid
     )
   );
-
+  console.log("Assignments from Redux:", assignment);
   const [name, setName] = useState(assignment ? assignment.title : "");
   const [description, setDescription] = useState(
     assignment ? assignment.description : ""
