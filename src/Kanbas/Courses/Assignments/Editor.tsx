@@ -1,49 +1,84 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 import { FaCalendarDays } from "react-icons/fa6";
 import "../../styles.css";
 import * as db from "../../Database";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addAssignment, updateAssignment } from "./reducer";
 
 export default function AssignmentEditor() {
   const { cid, aid } = useParams();
-  const assignment = db.assignments.find(
-    (assignment: any) => assignment.course === cid && assignment._id === aid
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const assignment = useSelector((state: any) =>
+    state.assignments.find(
+      (assignment: any) => assignment.course === cid && assignment._id === aid
+    )
   );
+
   if (!assignment) {
     return <div>Assignment not found</div>;
   }
+
+  const [name, setName] = useState(assignment.title);
+  const [description, setDescription] = useState(assignment.description);
+  const [points, setPoints] = useState(assignment.points);
+  const [dueDate, setDueDate] = useState(assignment.dueDate);
+  const [availableFrom, setAvailableFrom] = useState(assignment.availableFrom);
+  const [availableUntil, setAvailableUntil] = useState(
+    assignment.availableUntil
+  );
+
+  const handleSave = () => {
+    if (assignment) {
+      dispatch(
+        updateAssignment({
+          _id: assignment._id,
+          title: name,
+          description,
+          points,
+          dueDate,
+          availableFrom,
+          availableUntil,
+          course: cid,
+        })
+      );
+    } else {
+      dispatch(
+        addAssignment({
+          title: name,
+          description,
+          points,
+          dueDate,
+          availableFrom,
+          availableUntil,
+          course: cid,
+        })
+      );
+    }
+  };
+
   return (
     <div id="wd-assignments-editor">
       <label htmlFor="wd-name">Assignment Name</label>
       <input
         id="wd-name"
-        value={assignment.title}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
         className="form-control mb-2"
       />
       <br />
       <br />
       <div id="wd-description" className="form-control mb-2 p-3">
-        <p>
-          The assignment is{" "}
-          <strong className="text-danger">available online</strong>
-        </p>
-        <p>
-          Submit a link to the landing page of your Web application running on
-          Netlify.
-        </p>
-        <p>The landing page should include the following:</p>
-        <ul>
-          <li>Your full name and section</li>
-          <li>Links to each of the lab assignments</li>
-          <li>Link to the Kanbas application</li>
-          <li>Links to all relevant source code repositories</li>
-        </ul>
-        <p>
-          The Kanbas application should include a link to navigate back to the
-          landing page.
-        </p>
+        <textarea
+          id="wd-description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="form-control"
+        ></textarea>
       </div>
 
       <br />
@@ -57,8 +92,9 @@ export default function AssignmentEditor() {
             <input
               id="wd-points"
               type="number"
-              value={100}
-              className="form-control mb-2"
+              value={points}
+              onChange={(e) => setPoints(e.target.value)}
+              className="form-control"
             />
           </td>
         </tr>
@@ -201,7 +237,8 @@ export default function AssignmentEditor() {
               <input
                 id="wd-due-date"
                 type="text"
-                value="May 13, 2024, 11:59 PM"
+                value={dueDate}
+                onChange={(e) => setDueDate(e.target.value)}
                 className="form-control"
               />
               <span className="input-group-text">
@@ -220,7 +257,8 @@ export default function AssignmentEditor() {
               <input
                 id="wd-available-from"
                 type="text"
-                value="May 6, 2024, 12:00 AM"
+                value={availableFrom}
+                onChange={(e) => setAvailableFrom(e.target.value)}
                 className="form-control"
               />
               <span className="input-group-text">
@@ -239,7 +277,8 @@ export default function AssignmentEditor() {
               <input
                 id="wd-available-until"
                 type="text"
-                value="May 20, 2024, 12:00 AM"
+                value={availableUntil}
+                onChange={(e) => setAvailableUntil(e.target.value)}
                 className="form-control"
               />
               <span className="input-group-text">
@@ -258,12 +297,9 @@ export default function AssignmentEditor() {
         >
           Cancel
         </Link>
-        <Link
-          to={`/Kanbas/Courses/${cid}/Assignments`}
-          className="btn btn-danger"
-        >
+        <button className="btn btn-danger" onClick={handleSave}>
           Save
-        </Link>
+        </button>
       </div>
     </div>
   );

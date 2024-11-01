@@ -69,7 +69,6 @@ export default function NewAssignment() {
           onChange={(e) => setDueDate(e.target.value)}
           className="form-control mb-2"
         />
-        <FaCalendarDays />
       </div>
 
       <label htmlFor="wd-available-from">Available From</label>
