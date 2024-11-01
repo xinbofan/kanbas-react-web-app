@@ -4,16 +4,15 @@ import { BsGripVertical } from "react-icons/bs";
 import LessonControlButtons from "../Modules/LessonControlButtons";
 import { CiSearch } from "react-icons/ci";
 import { GoTriangleDown } from "react-icons/go";
+import { IoEllipsisVertical } from "react-icons/io5";
 import AssignmentControlButton from "./AssignmentControlButton";
 import * as db from "../../Database";
+import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { useParams, useNavigate } from "react-router";
-import { useSelector } from "react-redux";
 
 export default function Assignments() {
   const { cid } = useParams();
-  const navigate = useNavigate();
-  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const modules = db.modules;
   return (
     <div id="wd-assignments" className="p-3">
       <div className="d-flex justify-content-between align-items-center mb-3">
@@ -29,12 +28,12 @@ export default function Assignments() {
 
         <div>
           <button className="btn btn-secondary me-2">+ Group</button>
-          <button
+          <Link
+            to="/Kanbas/Courses/${assignment.course}/Assignments/AssignmentEditor"
             className="btn btn-danger"
-            onClick={() => navigate(`/Kanbas/Courses/${cid}/Assignments/new`)}
           >
             + Assignment
-          </button>
+          </Link>
         </div>
       </div>
 
@@ -52,7 +51,7 @@ export default function Assignments() {
           </div>
 
           <ul className="wd-assignment-content list-group rounded-0">
-            {assignments
+            {db.assignments
               .filter((assignment: any) => assignment.course === cid)
               .map((assignment: any) => (
                 <li

@@ -1,88 +1,49 @@
 import React from "react";
-
 import { FaAngleDown } from "react-icons/fa6";
 import { FaCalendarDays } from "react-icons/fa6";
 import "../../styles.css";
 import * as db from "../../Database";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { addAssignment } from "./reducer";
-import { useDispatch, useSelector } from "react-redux";
 
 export default function AssignmentEditor() {
   const { cid, aid } = useParams();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
-
-  const existingAssignment = assignments.find(
+  const assignment = db.assignments.find(
     (assignment: any) => assignment.course === cid && assignment._id === aid
   );
-
-  const [title, setTitle] = useState(existingAssignment?.title || "");
-  const [description, setDescription] = useState(
-    existingAssignment?.description || ""
-  );
-  const [points, setPoints] = useState(existingAssignment?.points || 100);
-  const [dueDate, setDueDate] = useState(
-    existingAssignment?.dueDate || "May 13, 2024, 11:59 PM"
-  );
-  const [availableFrom, setAvailableFrom] = useState(
-    existingAssignment?.availableFrom || "May 6, 2024, 12:00 AM"
-  );
-  const [availableUntil, setAvailableUntil] = useState(
-    existingAssignment?.availableUntil || "May 20, 2024, 12:00 AM"
-  );
-
-  const handleSave = () => {
-    if (existingAssignment) {
-      dispatch(
-        updateAssignment({
-          _id: aid,
-          title,
-          description,
-          points,
-          dueDate,
-          availableFrom,
-          availableUntil,
-          course: cid,
-        })
-      );
-    } else {
-      dispatch(
-        addAssignment({
-          _id: new Date().getTime().toString(),
-          title,
-          description,
-          points,
-          dueDate,
-          availableFrom,
-          availableUntil,
-          course: cid,
-        })
-      );
-    }
-    navigate(`/Kanbas/Courses/${cid}/Assignments`);
-  };
-
+  if (!assignment) {
+    return <div>Assignment not found</div>;
+  }
   return (
     <div id="wd-assignments-editor">
       <label htmlFor="wd-name">Assignment Name</label>
       <input
         id="wd-name"
-        value={title}
+        value={assignment.title}
         className="form-control mb-2"
-        onChange={(e) => setTitle(e.target.value)}
       />
       <br />
       <br />
       <div id="wd-description" className="form-control mb-2 p-3">
-        <textarea
-          id="wd-description"
-          value={description}
-          className="form-control mb-2"
-          onChange={(e) => setDescription(e.target.value)}
-        />
+        <p>
+          The assignment is{" "}
+          <strong className="text-danger">available online</strong>
+        </p>
+        <p>
+          Submit a link to the landing page of your Web application running on
+          Netlify.
+        </p>
+        <p>The landing page should include the following:</p>
+        <ul>
+          <li>Your full name and section</li>
+          <li>Links to each of the lab assignments</li>
+          <li>Link to the Kanbas application</li>
+          <li>Links to all relevant source code repositories</li>
+        </ul>
+        <p>
+          The Kanbas application should include a link to navigate back to the
+          landing page.
+        </p>
       </div>
 
       <br />
@@ -96,9 +57,8 @@ export default function AssignmentEditor() {
             <input
               id="wd-points"
               type="number"
-              value={points}
+              value={100}
               className="form-control mb-2"
-              onChange={(e) => setPoints(parseInt(e.target.value))}
             />
           </td>
         </tr>
@@ -241,9 +201,8 @@ export default function AssignmentEditor() {
               <input
                 id="wd-due-date"
                 type="text"
-                value={dueDate}
+                value="May 13, 2024, 11:59 PM"
                 className="form-control"
-                onChange={(e) => setDueDate(e.target.value)}
               />
               <span className="input-group-text">
                 <FaCalendarDays />
@@ -261,9 +220,8 @@ export default function AssignmentEditor() {
               <input
                 id="wd-available-from"
                 type="text"
-                value={availableFrom}
+                value="May 6, 2024, 12:00 AM"
                 className="form-control"
-                onChange={(e) => setAvailableFrom(e.target.value)}
               />
               <span className="input-group-text">
                 <FaCalendarDays />
@@ -281,9 +239,8 @@ export default function AssignmentEditor() {
               <input
                 id="wd-available-until"
                 type="text"
-                value={availableUntil}
+                value="May 20, 2024, 12:00 AM"
                 className="form-control"
-                onChange={(e) => setAvailableUntil(e.target.value)}
               />
               <span className="input-group-text">
                 <FaCalendarDays />
@@ -301,34 +258,13 @@ export default function AssignmentEditor() {
         >
           Cancel
         </Link>
-        <button className="btn btn-danger" onClick={handleSave}>
+        <Link
+          to={`/Kanbas/Courses/${cid}/Assignments`}
+          className="btn btn-danger"
+        >
           Save
-        </button>
+        </Link>
       </div>
     </div>
   );
-}
-function useState(arg0: any): [any, any] {
-  throw new Error("Function not implemented.");
-}
-
-function dispatch(arg0: any) {
-  throw new Error("Function not implemented.");
-}
-
-function updateAssignment(arg0: {
-  _id: string | undefined;
-  title: any;
-  description: any;
-  points: any;
-  dueDate: any;
-  availableFrom: any;
-  availableUntil: any;
-  course: string | undefined;
-}): any {
-  throw new Error("Function not implemented.");
-}
-
-function navigate(arg0: string) {
-  throw new Error("Function not implemented.");
 }
