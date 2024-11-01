@@ -13,9 +13,12 @@ export default function AssignmentEditor() {
   const dispatch = useDispatch();
 
   const assignment = useSelector((state: any) =>
-    state.assignments.find(
-      (assignment: any) => assignment.course === cid && assignment._id === aid
-    )
+    Array.isArray(state.assignments)
+      ? state.assignments.find(
+          (assignment: any) =>
+            assignment.course === cid && assignment._id === aid
+        )
+      : null
   );
 
   console.log("Course ID:", cid);

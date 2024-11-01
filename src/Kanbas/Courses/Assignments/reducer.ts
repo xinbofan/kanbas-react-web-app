@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { assignments } from "../../Database";
 
 const initialState = {
-  assignments: assignments,
+  assignments: Array.isArray(assignments) ? assignments : [],
 };
 
 const assignmentsSlice = createSlice({
