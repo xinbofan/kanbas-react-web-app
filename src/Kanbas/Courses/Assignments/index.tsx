@@ -29,7 +29,7 @@ export default function Assignments() {
         <div>
           <button className="btn btn-secondary me-2">+ Group</button>
           <Link
-            to="/Kanbas/Courses/${cid}/Assignments/new"
+            to={`/Kanbas/Courses/${cid}/Assignments/new`}
             className="btn btn-danger"
           >
             + Assignment
