@@ -13,9 +13,7 @@ export default function AssignmentEditor() {
   const dispatch = useDispatch();
 
   const assignment = useSelector((state: any) => {
-    const assignments = state.assignmentsReducer;
-    console.log(state);
-    console.log("Assignments from Redux:", assignments);
+    const assignments = state.assignmentsReducer.assignments;
     if (!assignments || !Array.isArray(assignments)) {
       return null;
     }
@@ -23,10 +21,7 @@ export default function AssignmentEditor() {
       (assignment: any) => assignment.course === cid && assignment._id === aid
     );
   });
-  console.log("Course ID:", cid);
-  console.log("Assignment ID:", aid);
 
-  console.log("Assignments from Redux:", assignment);
   const [name, setName] = useState(assignment ? assignment.title : "");
   const [description, setDescription] = useState(
     assignment ? assignment.description : ""
@@ -40,9 +35,9 @@ export default function AssignmentEditor() {
     assignment ? assignment.availableUntil : ""
   );
 
-  if (!assignment) {
-    return <div>Assignment not found</div>;
-  }
+  //   if (!assignment) {
+  //   return <div>Assignment not found</div>;
+  // }
 
   const handleSave = () => {
     if (assignment) {
@@ -84,14 +79,13 @@ export default function AssignmentEditor() {
       />
       <br />
       <br />
-      <div id="wd-description" className="form-control mb-2 p-3">
-        <textarea
-          id="wd-description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="form-control"
-        ></textarea>
-      </div>
+
+      <textarea
+        id="wd-description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        className="form-control mb-2 p-3"
+      ></textarea>
 
       <br />
       <br />
