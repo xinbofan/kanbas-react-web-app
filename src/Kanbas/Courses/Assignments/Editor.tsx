@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 import { FaCalendarDays } from "react-icons/fa6";
 import "../../styles.css";
@@ -13,40 +13,50 @@ export default function AssignmentEditor() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const assignment = useSelector((state: any) => {
-    const assignments = state.assignmentsReducer.assignments;
-    if (!assignments || !Array.isArray(assignments)) {
-      return null;
-    }
-    return assignments.find(
-      (assignment: any) => assignment.course === cid && assignment._id === aid
-    );
-  });
-  console.log(aid);
-  console.log(assignment);
-
-  const [name, setName] = useState(assignment ? assignment.title : "");
-  const [description, setDescription] = useState(
-    assignment ? assignment.description : ""
+  const assignments = useSelector(
+    (state: any) => state.assignmentsReducer.assignments
   );
-  const [points, setPoints] = useState(assignment ? assignment.points : "");
-  const [dueDate, setDueDate] = useState(assignment ? assignment.dueDate : "");
+
+  const existingAssignment = assignments.find(
+    (assignment: any) => assignment.course === cid && assignment._id === aid
+  );
+
+  const [name, setName] = useState(existingAssignment?.title || "");
+  const [description, setDescription] = useState(
+    existingAssignment?.description || ""
+  );
+  const [points, setPoints] = useState(existingAssignment?.points || "");
+  const [dueDate, setDueDate] = useState(existingAssignment?.dueDate || "");
   const [availableFrom, setAvailableFrom] = useState(
-    assignment ? assignment.availableFrom : ""
+    existingAssignment?.availableFrom || ""
   );
   const [availableUntil, setAvailableUntil] = useState(
-    assignment ? assignment.availableUntil : ""
+    existingAssignment?.availableUntil || ""
   );
 
-  //   if (!assignment) {
-  //   return <div>Assignment not found</div>;
-  // }
+  useEffect(() => {
+    if (aid !== "new" && existingAssignment) {
+      setName(existingAssignment.title);
+      setDescription(existingAssignment.description);
+      setPoints(existingAssignment.points);
+      setDueDate(existingAssignment.dueDate);
+      setAvailableFrom(existingAssignment.availableFrom);
+      setAvailableUntil(existingAssignment.availableUntil);
+    } else {
+      setName("");
+      setDescription("");
+      setPoints("");
+      setDueDate("");
+      setAvailableFrom("");
+      setAvailableUntil("");
+    }
+  }, [aid, existingAssignment]);
 
   const handleSave = () => {
-    if (assignment) {
+    if (aid === "new" || !existingAssignment) {
       dispatch(
-        updateAssignment({
-          _id: assignment._id,
+        addAssignment({
+          _id: new Date().getTime().toString(),
           title: name,
           description,
           points,
@@ -58,7 +68,8 @@ export default function AssignmentEditor() {
       );
     } else {
       dispatch(
-        addAssignment({
+        updateAssignment({
+          _id: existingAssignment._id,
           title: name,
           description,
           points,
