@@ -298,7 +298,7 @@ export default function AssignmentEditor() {
       <br />
       <div className="d-flex justify-content-end">
         <Link
-          to={`/courses/${cid}/assignments`}
+          to={`Kanbas/Courses/${cid}/Assignments`}
           className="btn btn-secondary me-2"
         >
           Cancel
