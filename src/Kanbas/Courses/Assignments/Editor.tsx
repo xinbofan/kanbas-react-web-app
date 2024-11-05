@@ -11,6 +11,7 @@ import { addAssignment, updateAssignment } from "./reducer";
 export default function AssignmentEditor() {
   const { cid, aid } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const assignment = useSelector((state: any) => {
     const assignments = state.assignmentsReducer.assignments;
@@ -66,6 +67,7 @@ export default function AssignmentEditor() {
         })
       );
     }
+    navigate(`/Kanbas/Courses/${cid}/Assignments`);
   };
 
   return (
@@ -298,7 +300,7 @@ export default function AssignmentEditor() {
       <br />
       <div className="d-flex justify-content-end">
         <Link
-          to={`Kanbas/Courses/${cid}/Assignments`}
+          to={`/Kanbas/Courses/${cid}/Assignments`}
           className="btn btn-secondary me-2"
         >
           Cancel
