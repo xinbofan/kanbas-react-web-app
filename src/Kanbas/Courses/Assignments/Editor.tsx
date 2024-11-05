@@ -13,7 +13,7 @@ export default function AssignmentEditor() {
   const dispatch = useDispatch();
 
   const assignment = useSelector((state: any) => {
-    const assignments = state.assignments;
+    const assignments = state.assignmentsReducer.assignments;
     console.log(state);
     console.log("Assignments from Redux:", assignments);
     if (!assignments || !Array.isArray(assignments)) {
