@@ -93,7 +93,9 @@ export default function Assignments() {
                     >
                       <FaTrash
                         className="text-danger me-2 mb-1"
-                        onClick={() => dispatch(deleteAssignment(cid))}
+                        onClick={() =>
+                          dispatch(deleteAssignment(assignment._id))
+                        }
                       />
                       <LessonControlButtons />
                     </div>
