@@ -10,6 +10,7 @@ import * as db from "../../Database";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
+import { deleteAssignment } from "./reducer";
 
 export default function Assignments() {
   const { cid } = useParams();
@@ -85,7 +86,10 @@ export default function Assignments() {
                       className="d-flex align-items-center"
                       style={{ marginLeft: "auto" }}
                     >
-                      <FaTrash />
+                      <FaTrash
+                        className="text-danger me-2 mb-1"
+                        onClick={() => deleteAssignment(cid)}
+                      />
                       <LessonControlButtons />
                     </div>
                   </div>
