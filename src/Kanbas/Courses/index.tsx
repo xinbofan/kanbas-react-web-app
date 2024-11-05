@@ -8,7 +8,6 @@ import AssignmentEditor from "./Assignments/Editor";
 import { table } from "console";
 import { FaAlignJustify } from "react-icons/fa";
 import PeopleTable from "./People/Table";
-import NewAssignment from "./Assignments/NewAssignment";
 
 export default function Courses({ courses }: { courses: any[] }) {
   const { cid } = useParams();
