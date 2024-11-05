@@ -9,6 +9,7 @@ import AssignmentControlButton from "./AssignmentControlButton";
 import * as db from "../../Database";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+import { FaTrash } from "react-icons/fa";
 
 export default function Assignments() {
   const { cid } = useParams();
@@ -84,6 +85,7 @@ export default function Assignments() {
                       className="d-flex align-items-center"
                       style={{ marginLeft: "auto" }}
                     >
+                      <FaTrash />
                       <LessonControlButtons />
                     </div>
                   </div>
