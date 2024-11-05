@@ -22,6 +22,8 @@ export default function AssignmentEditor() {
       (assignment: any) => assignment.course === cid && assignment._id === aid
     );
   });
+  console.log(aid);
+  console.log(assignment);
 
   const [name, setName] = useState(assignment ? assignment.title : "");
   const [description, setDescription] = useState(
