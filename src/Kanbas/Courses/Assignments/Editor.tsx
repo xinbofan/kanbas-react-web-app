@@ -100,6 +100,7 @@ export default function AssignmentEditor() {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         className="form-control mb-2 p-3"
+        placeholder="Description"
       ></textarea>
 
       <br />

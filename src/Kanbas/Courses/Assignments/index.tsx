@@ -20,6 +20,15 @@ export default function Assignments() {
     (state: any) => state.assignmentsReducer.assignments
   );
 
+  const handleDelete = (assignmentId: string) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to remove this assignment?"
+    );
+    if (confirmDelete) {
+      dispatch(deleteAssignment(assignmentId));
+    }
+  };
+
   return (
     <div id="wd-assignments" className="p-3">
       <div className="d-flex justify-content-between align-items-center mb-3">
@@ -93,9 +102,7 @@ export default function Assignments() {
                     >
                       <FaTrash
                         className="text-danger me-2 mb-1"
-                        onClick={() =>
-                          dispatch(deleteAssignment(assignment._id))
-                        }
+                        onClick={() => handleDelete(assignment._id)}
                       />
                       <LessonControlButtons />
                     </div>
