@@ -11,10 +11,15 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 import { deleteAssignment } from "./reducer";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Assignments() {
   const { cid } = useParams();
-  const modules = db.modules;
+  const dispatch = useDispatch();
+  const assignments = useSelector(
+    (state: any) => state.assignmentsReducer.assignments
+  );
+
   return (
     <div id="wd-assignments" className="p-3">
       <div className="d-flex justify-content-between align-items-center mb-3">
@@ -53,7 +58,7 @@ export default function Assignments() {
           </div>
 
           <ul className="wd-assignment-content list-group rounded-0">
-            {db.assignments
+            {assignments
               .filter((assignment: any) => assignment.course === cid)
               .map((assignment: any) => (
                 <li
@@ -88,7 +93,7 @@ export default function Assignments() {
                     >
                       <FaTrash
                         className="text-danger me-2 mb-1"
-                        onClick={() => deleteAssignment(cid)}
+                        onClick={() => dispatch(deleteAssignment(cid))}
                       />
                       <LessonControlButtons />
                     </div>
