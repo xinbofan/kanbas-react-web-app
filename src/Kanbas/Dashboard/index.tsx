@@ -143,7 +143,6 @@ export default function Dashboard() {
                       >
                         Go
                       </Link>
-
                       <ProtectedFaculty>
                         <div>
                           <button
@@ -169,6 +168,9 @@ export default function Dashboard() {
                           </button>
                         </div>
                       </ProtectedFaculty>
+                      console.log("showAllCourses:", showAllCourses);
+                      console.log("filteredCourses:", filteredCourses);
+                      console.log("enrollments:", enrollments);
                     </div>
                   </div>
                 </div>
