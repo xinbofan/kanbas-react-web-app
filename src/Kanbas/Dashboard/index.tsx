@@ -33,9 +33,9 @@ export default function Dashboard() {
         enrollment.user === currentUser._id && enrollment.course === courseId
     );
     if (isEnrolled) {
-      dispatch(unenrollCourse(courseId));
+      dispatch(unenrollCourse({ courseId, userId: currentUser._id }));
     } else {
-      dispatch(enrollCourse(courseId));
+      dispatch(enrollCourse({ courseId, userId: currentUser._id }));
     }
   };
 
