@@ -41,9 +41,35 @@ const coursesSlice = createSlice({
     toggleCourseView: (state) => {
       state.showAllCourses = !state.showAllCourses;
     },
+    enrollCourse: (state, action) => {
+      const { courseId, userId } = action.payload;
+      const newEnrollmentId =
+        state.enrollments.reduce(
+          (maxId, enrollment) => Math.max(maxId, parseInt(enrollment._id)),
+          0
+        ) + 1;
+      state.enrollments.push({
+        _id: newEnrollmentId.toString(),
+        user: userId,
+        course: courseId,
+      });
+    },
+    unenrollCourse: (state, action) => {
+      const { courseId, userId } = action.payload;
+      state.enrollments = state.enrollments.filter(
+        (enrollment) =>
+          !(enrollment.user === userId && enrollment.course === courseId)
+      );
+    },
   },
 });
 
-export const { addNewCourse, deleteCourse, updateCourse, toggleCourseView } =
-  coursesSlice.actions;
+export const {
+  addNewCourse,
+  deleteCourse,
+  updateCourse,
+  toggleCourseView,
+  enrollCourse,
+  unenrollCourse,
+} = coursesSlice.actions;
 export default coursesSlice.reducer;
