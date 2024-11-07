@@ -150,12 +150,14 @@ export default function Dashboard() {
                       <p className="card-text">{course.description}</p>
                     </div>
                     <div className="d-flex justify-content-between align-items-center mt-3">
-                      <Link
-                        to={`/Kanbas/Courses/${course._id}/Home`}
-                        className="btn btn-primary"
-                      >
-                        Go
-                      </Link>
+                      {isEnrolled && (
+                        <Link
+                          to={`/Kanbas/Courses/${course._id}/Home`}
+                          className="btn btn-primary"
+                        >
+                          Go
+                        </Link>
+                      )}
                       <ProtectedStudent>
                         <button
                           onClick={() => handleEnrollToggle(course._id)}
