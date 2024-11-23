@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import * as db from "../Database";
+import * as userClient from "../Account/client";
 import ProtectedFaculty from "../Account/ProtectedFaculty";
 import {
   addNewCourse,
@@ -14,40 +14,42 @@ import {
 } from "../Courses/reducer";
 import ProtectedStudent from "../Account/ProtectedStudent";
 
-export default function Dashboard() {
+export default function Dashboard({
+  courses,
+  addNewCourse,
+  deleteCourse,
+  currentCourse,
+  setCourse,
+}: {
+  courses: any[];
+  addNewCourse: () => void;
+  deleteCourse: (courseId: string) => void;
+  currentCourse: any;
+  setCourse: (course: any) => void;
+}) {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const { courses, enrollments, showAllCourses, currentCourse } = useSelector(
-    (state: any) => state.coursesReducer
-  );
-  const handleCourseChange = (field: string, value: any) => {
-    dispatch({
-      type: "courses/setCurrentCourse",
-      payload: { ...currentCourse, [field]: value },
-    });
-  };
+  const { showAllCourses } = useSelector((state: any) => state.coursesReducer);
+  // const handleCourseChange = (field: string, value: any) => {
+  //   dispatch({
+  //     type: "courses/setCurrentCourse",
+  //     payload: { ...currentCourse, [field]: value },
+  //   });
+  // };
 
-  const handleEnrollToggle = (courseId: any) => {
-    const isEnrolled = enrollments.some(
-      (enrollment: { user: any; course: any }) =>
-        enrollment.user === currentUser._id && enrollment.course === courseId
-    );
-    if (isEnrolled) {
-      dispatch(unenrollCourse({ courseId, userId: currentUser._id }));
-    } else {
-      dispatch(enrollCourse({ courseId, userId: currentUser._id }));
-    }
-  };
+  // const handleEnrollToggle = (courseId: any) => {
+  //   const isEnrolled = enrollments.some(
+  //     (enrollment: { user: any; course: any }) =>
+  //       enrollment.user === currentUser._id && enrollment.course === courseId
+  //   );
+  //   if (isEnrolled) {
+  //     dispatch(unenrollCourse({ courseId, userId: currentUser._id }));
+  //   } else {
+  //     dispatch(enrollCourse({ courseId, userId: currentUser._id }));
+  //   }
+  // };
 
-  const filteredCourses = showAllCourses
-    ? courses
-    : courses.filter((course: { _id: any }) =>
-        enrollments.some(
-          (enrollment: { user: any; course: any }) =>
-            enrollment.user === currentUser._id &&
-            enrollment.course === course._id
-        )
-      );
+  const filteredCourses = courses;
 
   return (
     <div className="p-4" id="wd-dashboard">
@@ -66,14 +68,14 @@ export default function Dashboard() {
           <button
             className="btn btn-primary float-end"
             id="wd-add-new-course-click"
-            onClick={() => dispatch(addNewCourse())}
+            onClick={() => addNewCourse()}
           >
             {" "}
             Add{" "}
           </button>
           <button
             className="btn btn-warning float-end me-2"
-            onClick={() => dispatch(updateCourse())}
+            onClick={() => updateCourse()}
             id="wd-update-course-click"
           >
             Update
@@ -84,12 +86,12 @@ export default function Dashboard() {
         <input
           defaultValue={currentCourse.name}
           className="form-control mb-2"
-          onChange={(e) => handleCourseChange("name", e.target.value)}
+          // onChange={(e) => handleCourseChange("name", e.target.value)}
         />
         <textarea
           defaultValue={currentCourse.description}
           className="form-control"
-          onChange={(e) => handleCourseChange("description", e.target.value)}
+          // onChange={(e) => handleCourseChange("description", e.target.value)}
         />
         <hr />
       </ProtectedFaculty>
@@ -131,11 +133,11 @@ export default function Dashboard() {
               | null
               | undefined;
           }) => {
-            const isEnrolled = enrollments.some(
-              (enrollment: { user: any; course: any }) =>
-                enrollment.user === currentUser._id &&
-                enrollment.course === course._id
-            );
+            // const isEnrolled = enrollments.some(
+            //   (enrollment: { user: any; course: any }) =>
+            //     enrollment.user === currentUser._id &&
+            //     enrollment.course === course._id
+            // );
             return (
               <div key={course._id} className="col" style={{ width: "300px" }}>
                 <div className="card rounded h-100">
@@ -150,24 +152,39 @@ export default function Dashboard() {
                       <p className="card-text">{course.description}</p>
                     </div>
                     <div className="d-flex justify-content-between align-items-center mt-3">
-                      {isEnrolled && (
-                        <Link
-                          to={`/Kanbas/Courses/${course._id}/Home`}
-                          className="btn btn-primary"
-                        >
-                          Go
-                        </Link>
-                      )}
-                      <ProtectedStudent>
+                      <Link
+                        to={`/Kanbas/Courses/${course._id}/Home`}
+                        className="btn btn-primary"
+                      >
+                        Go
+                      </Link>
+                      <ProtectedFaculty>
                         <button
-                          onClick={() => handleEnrollToggle(course._id)}
+                          onClick={(event) => {
+                            event.preventDefault();
+                            if (typeof course._id === "string") {
+                              deleteCourse(course._id);
+                            } else {
+                              console.error("Invalid course ID:", course._id);
+                            }
+                          }}
+                          className="btn btn-danger float-end"
+                          id="wd-delete-course-click"
+                        >
+                          Delete
+                        </button>
+                      </ProtectedFaculty>
+
+                      {/* <ProtectedStudent> */}
+                      {/* <button
+                          // onClick={() => }
                           className={`btn ${
                             isEnrolled ? "btn-danger" : "btn-success"
                           }`}
                         >
                           {isEnrolled ? "Unenroll" : "Enroll"}
-                        </button>
-                      </ProtectedStudent>
+                        </button> */}
+                      {/* </ProtectedStudent> */}
                     </div>
                   </div>
                 </div>
