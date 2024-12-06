@@ -38,3 +38,39 @@ export const findModulesForCourse = async (courseId: string) => {
   );
   return response.data;
 };
+
+//xin xie de
+export const createAssignmentForCourse = async (
+  courseId: string,
+  assignment: any
+) => {
+  const response = await axiosWithCredentials.post(
+    `${COURSES_API}/${courseId}/assignments`,
+    assignment
+  );
+  return response.data;
+};
+
+export const findAssignmentsForCourse = async (courseId: string) => {
+  const response = await axiosWithCredentials.get(
+    `${COURSES_API}/${courseId}/assignments`
+  );
+  return response.data;
+};
+
+export const createQuizForCourse = async (courseId: string, quiz: any) => {
+  const response = await axiosWithCredentials.post(
+    `${COURSES_API}/${courseId}/quizzes`,
+    quiz
+  );
+  return response.data;
+};
+
+export const findQuizzesForCourse = async (courseId: string) => {
+  const response = await axiosWithCredentials.get(
+    `${COURSES_API}/${courseId}/quizzes`
+  );
+  return response.data;
+};
+
+//xin xie de

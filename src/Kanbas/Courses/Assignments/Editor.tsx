@@ -7,7 +7,8 @@ import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addAssignment, updateAssignment } from "./reducer";
-
+import * as assignmentsClient from "./client";
+import * as coursesClient from "../client";
 export default function AssignmentEditor() {
   const { cid, aid } = useParams();
   const dispatch = useDispatch();
@@ -52,35 +53,48 @@ export default function AssignmentEditor() {
     }
   }, [aid, existingAssignment]);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (aid === "new" || !existingAssignment) {
-      dispatch(
-        addAssignment({
-          _id: new Date().getTime().toString(),
-          title: name,
-          description,
-          points,
-          dueDate,
-          availableFrom,
-          availableUntil,
-          course: cid,
-        })
+      const newAssignment = {
+        _id: new Date().getTime().toString(),
+        title: name,
+        description,
+        points,
+        dueDate,
+        availableFrom,
+        availableUntil,
+        course: cid,
+      };
+      dispatch(addAssignment(newAssignment));
+      await coursesClient.createAssignmentForCourse(
+        cid as string,
+        newAssignment
       );
     } else {
-      dispatch(
-        updateAssignment({
-          _id: existingAssignment._id,
-          title: name,
-          description,
-          points,
-          dueDate,
-          availableFrom,
-          availableUntil,
-          course: cid,
-        })
-      );
+      console.log("Assignment to save:", {
+        title: name,
+        description,
+        points,
+        dueDate,
+        availableFrom,
+        availableUntil,
+        course: cid,
+      });
+      const updatedAssignment = {
+        _id: existingAssignment._id,
+        title: name,
+        description,
+        points,
+        dueDate,
+        availableFrom,
+        availableUntil,
+        course: cid,
+      };
+      console.log("Updating assignment:", updatedAssignment);
+      dispatch(updateAssignment(updatedAssignment));
+      await assignmentsClient.updateAssignment(updatedAssignment);
     }
-    navigate(`/Kanbas/Courses/${cid}/Assignments`);
+    navigate(`/Kanbas/Courses/${cid}/assignments`);
   };
 
   return (

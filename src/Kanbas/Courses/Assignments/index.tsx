@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineAssignment } from "react-icons/md";
 import { BsGripVertical } from "react-icons/bs";
 import LessonControlButtons from "../Modules/LessonControlButtons";
@@ -10,24 +10,62 @@ import * as db from "../../Database";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
-import { deleteAssignment } from "./reducer";
+import {
+  setAssignments,
+  addAssignment,
+  deleteAssignment,
+  updateAssignment,
+} from "./reducer";
 import { useDispatch, useSelector } from "react-redux";
+import * as assignmentsClient from "./client";
+import * as coursesClient from "../client";
 
 export default function Assignments() {
   const { cid } = useParams();
+  const [assignmentTitle, setAssignmentTitle] = useState(""); //xinxiede
   const dispatch = useDispatch();
   const assignments = useSelector(
     (state: any) => state.assignmentsReducer.assignments
   );
 
-  const handleDelete = (assignmentId: string) => {
+  const handleDelete = async (assignmentId: string) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to remove this assignment?"
     );
     if (confirmDelete) {
+      await assignmentsClient.deleteAssignment(assignmentId);
       dispatch(deleteAssignment(assignmentId));
     }
   };
+
+  // xin xie de
+
+  const removeAssignment = async (assignmentId: string) => {
+    await assignmentsClient.deleteAssignment(assignmentId);
+    dispatch(deleteAssignment(assignmentId));
+  };
+
+  const fetchAssignments = async () => {
+    const assignments = await coursesClient.findAssignmentsForCourse(
+      cid as string
+    );
+    dispatch(setAssignments(assignments));
+  };
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
+
+  const createAssignmentForCourse = async () => {
+    if (!cid) return;
+    const newAssignment = { title: assignmentTitle, course: cid };
+    const assignment = await coursesClient.createAssignmentForCourse(
+      cid,
+      newAssignment
+    );
+    dispatch(addAssignment(assignment));
+  };
+
+  // xin xie de
 
   return (
     <div id="wd-assignments" className="p-3">
@@ -68,7 +106,7 @@ export default function Assignments() {
 
           <ul className="wd-assignment-content list-group rounded-0">
             {assignments
-              .filter((assignment: any) => assignment.course === cid)
+              //.filter((assignment: any) => assignment.course === cid)
               .map((assignment: any) => (
                 <li
                   key={assignment._id}
