@@ -41,7 +41,7 @@ export default function QuizDetails() {
 
   const handleTakeQuiz = () => {
     if (!quiz.multipleAttempts && lastAttempt) {
-      alert("You have no remaining attempts for this quiz.");
+      alert("You are not able to take this quiz one more time.");
       return;
     }
 
@@ -173,19 +173,22 @@ export default function QuizDetails() {
             <div className="mb-3">
               <p>
                 Last Attempt:{" "}
-                <span className="text-primary">
+                <span
+                  className="text-primary"
+                  style={{ cursor: "pointer", textDecoration: "underline" }}
+                  onClick={() =>
+                    navigate(`/Kanbas/Courses/${cid}/quizzes/${quizId}/review`)
+                  }
+                >
                   {new Date(lastAttempt.takenAt).toLocaleString()}
                 </span>
               </p>
               <p>
-                Score:{" "}
-                <span className="text-success">
-                  {lastAttempt.score} / {quiz.points}
-                </span>
+                Score: <span className="text-success">{lastAttempt.score}</span>
               </p>
             </div>
           ) : (
-            <p>No attempts yet.</p>
+            <p>Haven't take the quiz.</p>
           )}
           <button className="btn btn-danger" onClick={handleTakeQuiz}>
             Take Quiz

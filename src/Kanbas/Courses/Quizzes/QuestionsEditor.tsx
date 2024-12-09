@@ -35,20 +35,17 @@ export default function QuestionsEditor() {
   };
 
   const handleCancel = async () => {
-    // 删除所有新建问题
     const newlyCreatedQuestions = questions.filter(
       (q) => !originalQuestions.some((oq) => oq._id === q._id)
     );
 
     for (const question of newlyCreatedQuestions) {
       try {
-        await deleteQuestion(question._id); // 从后端删除新建的问题
+        await deleteQuestion(question._id);
       } catch (error) {
         console.error(`Error deleting question ${question._id}:`, error);
       }
     }
-
-    // 恢复到原始问题状态
     setQuestions(originalQuestions);
     navigate(`/Kanbas/Courses/${cid}/quizzes/${quizId}/details`);
   };
@@ -97,7 +94,7 @@ export default function QuestionsEditor() {
           Questions
         </button>
       </div>
-      <ul className="list-group rounded-0">
+      <ul className="list-group rounded-1 mt-2 mb-2 ms-2 me-2">
         {questions.map((question, index) => (
           <li
             key={question._id}
@@ -108,7 +105,7 @@ export default function QuestionsEditor() {
               )
             }
           >
-            <span>{question.title}</span>
+            <span className="mt-2 mb-2 ms-2 me-2">{question.title}</span>
             <button
               type="button"
               className="btn btn-danger btn-sm"

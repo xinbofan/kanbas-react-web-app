@@ -32,7 +32,7 @@ export default function QuizDetailsEditor() {
     try {
       await quizzesClient.updateQuiz(quiz._id, quiz);
       alert("Quiz updated successfully!");
-      navigate(`/Kanbas/Courses/${cid}/quizzes/${quizId}/details`); // 保存成功后跳转回 QuizDetails 页面
+      navigate(`/Kanbas/Courses/${cid}/quizzes/${quizId}/details`);
     } catch (error) {
       console.error("Error updating quiz:", error);
       alert("Failed to update quiz. Please try again.");

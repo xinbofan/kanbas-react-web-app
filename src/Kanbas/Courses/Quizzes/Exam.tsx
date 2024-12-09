@@ -1,43 +1,48 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { fetchExamDetails, fetchLastAttempt, submitQuiz } from "./client"; // Adjust to your client file path
+import { useParams, useNavigate, useLocation } from "react-router-dom";
+import {
+  findQuestionsForQuiz,
+  fetchLastAttempt,
+  submitQuiz,
+  findQuizById,
+} from "./client";
 import { useSelector } from "react-redux";
 
 export default function Exam() {
   const { quizId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
 
   const [quiz, setQuiz] = useState<any>(null);
   const [questions, setQuestions] = useState<any[]>([]);
   const [answers, setAnswers] = useState<any>({});
-  const [lastAttempt, setLastAttempt] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
-  // Fetch exam details and last attempt
+  const readOnly =
+    location.pathname.includes("review") &&
+    !location.pathname.includes("preview");
+  const previewMode = location.pathname.includes("preview");
+
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const examDetails = await fetchExamDetails(quizId!);
-        setQuiz(examDetails.quiz);
-        setQuestions(examDetails.questions);
+      if (!quizId) return;
 
-        // Fetch last attempt for students or preview for faculty
-        if (
-          currentUser?.role === "STUDENT" ||
-          currentUser?.role === "FACULTY"
-        ) {
-          const attempt = await fetchLastAttempt(currentUser._id, quizId!);
-          setLastAttempt(attempt);
-          if (attempt) {
-            setAnswers(
-              attempt.answers.reduce((acc: any, answer: any) => {
-                acc[answer.question] = answer.userAnswer;
-                return acc;
-              }, {})
-            );
-          }
+      try {
+        const curQuiz = await findQuizById(quizId);
+        setQuiz(curQuiz);
+        const questions = await findQuestionsForQuiz(quizId);
+        setQuestions(questions);
+        const attempt = await fetchLastAttempt(currentUser._id, quizId);
+
+        if (attempt) {
+          setAnswers(
+            attempt.answers.reduce((acc: any, answer: any) => {
+              acc[answer.question] = answer.userAnswer;
+              return acc;
+            }, {})
+          );
         }
       } catch (error) {
         console.error("Error loading exam data:", error);
@@ -64,97 +69,169 @@ export default function Exam() {
 
       const result = await submitQuiz(quizId!, submissionData);
       alert(`Quiz submitted! Your score: ${result.score}`);
-      setIsSubmitted(true);
       navigate(`/Kanbas/Courses/${quiz.course}/quizzes/${quizId}/details`);
     } catch (error) {
       console.error("Error submitting quiz:", error);
-      alert("Failed to submit quiz. Please try again.");
     }
   };
 
   if (loading) return <p>Loading exam...</p>;
-  if (!quiz) return <p>Quiz not foundaa.</p>;
+
+  const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <div className="p-4">
-      <h2>{quiz.title}</h2>
+    <div id="wd-exam" className="p-4">
+      <h2 className="fw-bold">{quiz.title}</h2>
+      {previewMode && (
+        <div className="alert alert-danger">
+          This is a preview of the published version of the quiz
+        </div>
+      )}
       <p>{quiz.description}</p>
+      <hr />
 
-      {questions.map((question, index) => (
-        <div key={question._id} className="mb-4">
-          <h5>
-            {index + 1}. {question.title}
-          </h5>
-          <p>{question.text}</p>
+      <table className="table table-bordered ">
+        <thead className="table-light">
+          <tr>
+            <th colSpan={2}>
+              <div className="d-flex justify-content-between">
+                <span className="mt-2 mb-2 ms-2">{currentQuestion.title}</span>
+                <span className="mb-2 mt-2 me-2">
+                  {currentQuestion.points} pts
+                </span>
+              </div>
+            </th>
+          </tr>
+        </thead>
 
-          {question.questionType === "Multiple Choice" && (
-            <div>
-              {question.options.map((option: any, optIndex: number) => (
-                <div key={optIndex} className="form-check">
+        <tbody>
+          <tr>
+            <td colSpan={2}>
+              <p className="mt-2 mb-3 ms-2 me-2">{currentQuestion.text}</p>
+              {currentQuestion.questionType === "Multiple Choice" && (
+                <div className="mt-2 mb-2 ms-2 me-2">
+                  {currentQuestion.options.map(
+                    (option: any, optIndex: number) => (
+                      <>
+                        <div className="form-check mb-2">
+                          <input
+                            type="radio"
+                            className="form-check-input"
+                            id={`${currentQuestion._id}-${optIndex}`}
+                            name={currentQuestion._id}
+                            value={option.text}
+                            checked={
+                              answers[currentQuestion._id] === option.text
+                            }
+                            disabled={readOnly}
+                            onChange={(e) =>
+                              handleAnswerChange(
+                                currentQuestion._id,
+                                e.target.value
+                              )
+                            }
+                          />
+                          <label
+                            htmlFor={`${currentQuestion._id}-${optIndex}`}
+                            className="form-check-label"
+                          >
+                            {option.text}
+                          </label>
+                        </div>
+                        {optIndex < currentQuestion.options.length - 1 && (
+                          <hr />
+                        )}
+                      </>
+                    )
+                  )}
+                </div>
+              )}
+
+              {currentQuestion.questionType === "True/False" && (
+                <div className="mt-2 mb-2 ms-2 me-2">
+                  <div className="form-check mb-2">
+                    <input
+                      type="radio"
+                      className="form-check-input"
+                      id={`${currentQuestion._id}-true`}
+                      name={currentQuestion._id}
+                      value="true"
+                      checked={answers[currentQuestion._id] === "true"}
+                      disabled={readOnly}
+                      onChange={(e) =>
+                        handleAnswerChange(currentQuestion._id, e.target.value)
+                      }
+                    />
+                    <label
+                      htmlFor={`${currentQuestion._id}-true`}
+                      className="form-check-label"
+                    >
+                      True
+                    </label>
+                  </div>
+                  <hr />
+                  <div className="form-check">
+                    <input
+                      type="radio"
+                      className="form-check-input"
+                      id={`${currentQuestion._id}-false`}
+                      name={currentQuestion._id}
+                      value="false"
+                      checked={answers[currentQuestion._id] === "false"}
+                      disabled={readOnly}
+                      onChange={(e) =>
+                        handleAnswerChange(currentQuestion._id, e.target.value)
+                      }
+                    />
+                    <label
+                      htmlFor={`${currentQuestion._id}-false`}
+                      className="form-check-label"
+                    >
+                      False
+                    </label>
+                  </div>
+                </div>
+              )}
+
+              {currentQuestion.questionType === "Fill in the Blank" && (
+                <div className="mt-2 mb-2 ms-2 me-2">
                   <input
-                    type="radio"
-                    className="form-check-input"
-                    id={`${question._id}-${optIndex}`}
-                    name={question._id}
-                    value={option.text}
-                    checked={answers[question._id] === option.text}
-                    disabled={currentUser?.role === "STUDENT" && lastAttempt}
+                    type="text"
+                    className="form-control"
+                    placeholder="Type your answer here"
+                    value={answers[currentQuestion._id] || ""}
+                    disabled={readOnly}
                     onChange={(e) =>
-                      handleAnswerChange(question._id, e.target.value)
+                      handleAnswerChange(currentQuestion._id, e.target.value)
                     }
                   />
-                  <label
-                    htmlFor={`${question._id}-${optIndex}`}
-                    className="form-check-label"
-                  >
-                    {option.text}
-                  </label>
                 </div>
-              ))}
-            </div>
-          )}
+              )}
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-          {question.questionType === "True/False" && (
-            <select
-              className="form-select"
-              value={answers[question._id] || ""}
-              disabled={currentUser?.role === "STUDENT" && lastAttempt}
-              onChange={(e) => handleAnswerChange(question._id, e.target.value)}
-            >
-              <option value="">Select an answer</option>
-              <option value="true">True</option>
-              <option value="false">False</option>
-            </select>
-          )}
-
-          {question.questionType === "Fill in the Blank" && (
-            <input
-              type="text"
-              className="form-control"
-              value={answers[question._id] || ""}
-              disabled={currentUser?.role === "STUDENT" && lastAttempt}
-              onChange={(e) => handleAnswerChange(question._id, e.target.value)}
-            />
-          )}
-        </div>
-      ))}
-
-      <div className="d-flex justify-content-end">
-        {currentUser?.role === "STUDENT" && lastAttempt && (
-          <p>
-            Last Attempt: {new Date(lastAttempt.takenAt).toLocaleString()} |
-            Score: {lastAttempt.score} / {quiz.points}
-          </p>
-        )}
-        {!isSubmitted && (!lastAttempt || currentUser?.role === "FACULTY") && (
-          <button
-            className="btn btn-primary"
-            onClick={handleSubmit}
-            disabled={currentUser?.role === "STUDENT" && lastAttempt}
-          >
-            Submit
+      <div className="d-flex justify-content-between mt-3">
+        <button
+          className="btn btn-secondary"
+          disabled={currentQuestionIndex === 0}
+          onClick={() => setCurrentQuestionIndex(currentQuestionIndex - 1)}
+        >
+          Previous
+        </button>
+        {!readOnly && (
+          <button className="btn btn-danger" onClick={handleSubmit}>
+            Submit Quiz
           </button>
         )}
+        <button
+          className="btn btn-secondary"
+          disabled={currentQuestionIndex === questions.length - 1}
+          onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 1)}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

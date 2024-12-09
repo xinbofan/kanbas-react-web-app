@@ -12,6 +12,7 @@ export const findQuestionsForQuiz = async (quizId: string) => {
   );
   return response.data;
 };
+
 export const findQuizById = async (quizId: string) => {
   const response = await axiosWithCredentials.get(`${QUIZZES_API}/${quizId}`);
   return response.data;
@@ -66,22 +67,13 @@ export const deleteQuestion = async (questionId: string) => {
 };
 
 //taken de :
-export const fetchExamDetails = async (quizId: string) => {
-  const response = await axiosWithCredentials.get(
-    `${QUIZZES_API}/${quizId}/exam`
-  );
-  return response.data;
-};
-
-// 获取学生最近一次考试记录
 export const fetchLastAttempt = async (userId: string, quizId: string) => {
-  const response = await axiosWithCredentials.get(
+  const response = await axios.get(
     `${QUIZ_TAKEN_API}/${userId}/${quizId}/lastAttempt`
   );
   return response.data;
 };
 
-// 提交考试答案
 export const submitQuiz = async (quizId: string, submissionData: any) => {
   const response = await axiosWithCredentials.post(
     `${QUIZ_TAKEN_API}/${quizId}`,
@@ -90,7 +82,6 @@ export const submitQuiz = async (quizId: string, submissionData: any) => {
   return response.data;
 };
 
-// 获取考试尝试次数
 export const fetchAttemptCount = async (userId: string, quizId: string) => {
   const response = await axiosWithCredentials.get(
     `${QUIZ_TAKEN_API}/${userId}/${quizId}/attempts`

@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import {
-  FaPlus,
-  FaEdit,
-  FaTrash,
-  FaCheck,
-  FaTimes,
-  FaCheckCircle,
-} from "react-icons/fa";
+import { FaPlus, FaCheckCircle } from "react-icons/fa";
 import * as coursesClient from "../client";
 import * as quizzesClient from "./client";
 import ProtectedFaculty from "../../Account/ProtectedFaculty";
