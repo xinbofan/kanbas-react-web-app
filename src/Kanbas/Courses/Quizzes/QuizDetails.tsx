@@ -4,25 +4,50 @@ import ProtectedFaculty from "../../Account/ProtectedFaculty";
 import ProtectedStudent from "../../Account/ProtectedStudent";
 import * as quizzesClient from "./client";
 import { FaPencilAlt } from "react-icons/fa";
+import { useSelector } from "react-redux";
+
 export default function QuizDetails() {
   const navigate = useNavigate();
-
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { cid, quizId } = useParams();
   const [quiz, setQuiz] = useState<any>(null);
-
+  const [lastAttempt, setLastAttempt] = useState<any>(null);
   useEffect(() => {
-    const fetchQuiz = async () => {
-      if (quizId) {
-        const fetchedQuiz = await quizzesClient.findQuizById(quizId);
-        setQuiz(fetchedQuiz);
+    const fetchQuizData = async () => {
+      try {
+        if (quizId) {
+          const fetchedQuiz = await quizzesClient.findQuizById(quizId);
+          setQuiz(fetchedQuiz);
+
+          if (currentUser?.role === "STUDENT") {
+            const attempt = await quizzesClient.fetchLastAttempt(
+              currentUser._id,
+              quizId
+            );
+            setLastAttempt(attempt);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching quiz details:", error);
       }
     };
-    fetchQuiz();
-  }, [quizId]);
+
+    fetchQuizData();
+  }, [quizId, currentUser]);
 
   if (!quiz) {
     return <p>Loading quiz...</p>;
   }
+
+  const handleTakeQuiz = () => {
+    if (!quiz.multipleAttempts && lastAttempt) {
+      alert("You have no remaining attempts for this quiz.");
+      return;
+    }
+
+    navigate(`/Kanbas/Courses/${cid}/quizzes/${quizId}/take`);
+  };
+
   return (
     <div className="p-4">
       <ProtectedFaculty>
@@ -144,12 +169,25 @@ export default function QuizDetails() {
 
       <ProtectedStudent>
         <div className="text-center mt-4">
-          <button
-            className="btn btn-danger"
-            onClick={() =>
-              navigate(`/Kanbas/Courses/${cid}/quizzes/${quizId}/take`)
-            }
-          >
+          {lastAttempt ? (
+            <div className="mb-3">
+              <p>
+                Last Attempt:{" "}
+                <span className="text-primary">
+                  {new Date(lastAttempt.takenAt).toLocaleString()}
+                </span>
+              </p>
+              <p>
+                Score:{" "}
+                <span className="text-success">
+                  {lastAttempt.score} / {quiz.points}
+                </span>
+              </p>
+            </div>
+          ) : (
+            <p>No attempts yet.</p>
+          )}
+          <button className="btn btn-danger" onClick={handleTakeQuiz}>
             Take Quiz
           </button>
         </div>

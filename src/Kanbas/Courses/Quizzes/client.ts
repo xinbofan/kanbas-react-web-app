@@ -4,6 +4,7 @@ const axiosWithCredentials = axios.create({ withCredentials: true });
 const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER;
 const QUIZZES_API = `${REMOTE_SERVER}/api/quizzes`;
 const QUESTIONS_API = `${REMOTE_SERVER}/api/questions`;
+const QUIZ_TAKEN_API = `${REMOTE_SERVER}/api/quizTaken`;
 
 export const findQuestionsForQuiz = async (quizId: string) => {
   const response = await axiosWithCredentials.get(
@@ -60,6 +61,39 @@ export const updateQuestion = async (
 export const deleteQuestion = async (questionId: string) => {
   const response = await axiosWithCredentials.delete(
     `${QUESTIONS_API}/${questionId}`
+  );
+  return response.data;
+};
+
+//taken de :
+export const fetchExamDetails = async (quizId: string) => {
+  const response = await axiosWithCredentials.get(
+    `${QUIZZES_API}/${quizId}/exam`
+  );
+  return response.data;
+};
+
+// 获取学生最近一次考试记录
+export const fetchLastAttempt = async (userId: string, quizId: string) => {
+  const response = await axiosWithCredentials.get(
+    `${QUIZ_TAKEN_API}/${userId}/${quizId}/lastAttempt`
+  );
+  return response.data;
+};
+
+// 提交考试答案
+export const submitQuiz = async (quizId: string, submissionData: any) => {
+  const response = await axiosWithCredentials.post(
+    `${QUIZ_TAKEN_API}/${quizId}`,
+    submissionData
+  );
+  return response.data;
+};
+
+// 获取考试尝试次数
+export const fetchAttemptCount = async (userId: string, quizId: string) => {
+  const response = await axiosWithCredentials.get(
+    `${QUIZ_TAKEN_API}/${userId}/${quizId}/attempts`
   );
   return response.data;
 };

@@ -36,7 +36,9 @@ body * {
 .wd-assignment {
   border-left: 3px solid green !important;
 }
-
+.wd-quiz {
+  border-left: 3px solid green !important;
+}
 .dropdown-container {
   position: relative;
   display: inline-block;
